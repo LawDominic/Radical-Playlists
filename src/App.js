@@ -1,8 +1,12 @@
+import React from 'react';
+import NavBar from "./components/NavBar"
+
 function App() {
   return (
-    <div className="App">
+    <div class="container mx-auto">
+      <NavBar />
       <p class="font-gotham font-black text-9xl">
-        <strong>Spotify 123</strong>
+        Spotify 123
       </p>
     </div>
   );
