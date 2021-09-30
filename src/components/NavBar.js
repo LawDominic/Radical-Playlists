@@ -18,7 +18,7 @@ function NavBar() {
           <div className="flex space-x-20">
             <Link to="/" className="flex items-center py-4 px-2">
               <img src={`${logo}`} className="h-10 w-10 mr-2" alt="logo" />
-              <span className="font-semibold text-white text-lg hover:text-green-500">
+              <span className="font-semibold text-white text-lg">
                 Radical Playlists
               </span>
             </Link>
