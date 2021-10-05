@@ -14,11 +14,11 @@ function NavBar() {
   return (
     <div class="bg-black">
       <div class="container mx-auto">
-        <div className="flex justify-between font-gotham">
+        <div className="flex justify-between">
           <div className="flex space-x-20">
             <Link to="/" className="flex items-center py-4 px-2">
               <img src={`${logo}`} className="h-10 w-10 mr-2" alt="logo" />
-              <span className="font-semibold text-white text-lg hover:text-green-500">
+              <span className="font-semibold text-white text-lg">
                 Radical Playlists
               </span>
             </Link>
@@ -43,7 +43,7 @@ function NavBar() {
             to="/login"
             className="justify-end my-auto text-white hover:text-green-500 transition duration-300"
           >
-            <button class="bg-green-500 px-5 py-2 text-green-100 rounded-full hover:shadow-2xl hover:bg-green-600">
+            <button class="bg-green-500 px-5 py-2 text-white rounded-full hover:shadow-2xl hover:bg-green-600">
               <p className="font-semibold">Login</p>
             </button>
           </NavLink>

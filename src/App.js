@@ -1,15 +1,16 @@
 import React from 'react';
+import Footer from "./components/Footer"
 import NavBar from "./components/NavBar"
+import Playlists from "./components/Playlists"
 
 function App() {
   return (
-    <div>
+    <div class="min-h-screen h-full bg-gray-100 font-gotham">
       <NavBar />
       <div class="container mx-auto">
-        <p class="font-gotham font-black text-9xl">
-          Spotify 123
-        </p>
+        <Playlists />
       </div>
+      <Footer />
     </div>
   );
 }
