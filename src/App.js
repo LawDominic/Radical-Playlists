@@ -11,9 +11,6 @@ function App() {
   return (
     <div class="min-h-screen h-full bg-gray-100 font-gotham">
       <NavBar />
-      <div class="container mx-auto">
-        <Playlists />
-      </div>
       <div>
         {code ? <Dashboard code={code} /> : <> </>}
       </div>
