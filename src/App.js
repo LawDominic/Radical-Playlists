@@ -1,7 +1,11 @@
 import React from 'react';
+import Dashboard from './components/Dashboard';
 import Footer from "./components/Footer"
 import NavBar from "./components/NavBar"
 import Playlists from "./components/Playlists"
+
+const code = new URLSearchParams(window.location.search).get('code')
+
 
 function App() {
   return (
@@ -9,6 +13,9 @@ function App() {
       <NavBar />
       <div class="container mx-auto">
         <Playlists />
+      </div>
+      <div>
+        {code ? <Dashboard code={code} /> : <> </>}
       </div>
       <Footer />
     </div>

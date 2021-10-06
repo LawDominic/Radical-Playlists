@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { Link, NavLink, Route, Switch } from "react-router-dom";
 import logo from "../images/logo.png";
+import axios from 'axios'
+import navigateServices from '../services/navigate'
+
+import {loginUrl} from '../services/spotify'
+
 
 function NavBar() {
   const mobileMenuHandler = (event) => {
@@ -11,7 +16,13 @@ function NavBar() {
       menu.classList.toggle("hidden");
     });
   };
+
+  const login = () => {
+    navigateServices.getLogin();
+  }
+
   return (
+
     <div class="bg-black">
       <div class="container mx-auto">
         <div className="flex justify-between">
@@ -39,14 +50,14 @@ function NavBar() {
               </NavLink>
             </div>
           </div>
-          <NavLink
-            to="/login"
+          <a
+            href={loginUrl}
             className="justify-end my-auto text-white hover:text-green-500 transition duration-300"
           >
             <button class="bg-green-500 px-5 py-2 text-white rounded-full hover:shadow-2xl hover:bg-green-600">
               <p className="font-semibold">Login</p>
             </button>
-          </NavLink>
+          </a>
           <div className="md:hidden flex items-center mr-4">
             <button
               onClick={mobileMenuHandler}
