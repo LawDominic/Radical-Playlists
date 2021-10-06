@@ -1,7 +1,7 @@
 import React from "react";
-import { Link, NavLink, Route, Switch } from "react-router-dom";
+import { Link, NavLink} from "react-router-dom";
 import Playlists from "./NavBar";
-import Upload from "./Upload";
+// import Upload from "./Upload";
 
 import logo from "../images/logo.png";
 import {loginUrl} from '../services/spotify'
@@ -93,10 +93,7 @@ function NavBar() {
           </div>
         </div>
       </div>
-      <Switch>
-        <Route path="/upload"><Upload /></Route>
-        <Route path="/"><Playlists /></Route>
-      </Switch>
+     
     </div>
   );
 }
