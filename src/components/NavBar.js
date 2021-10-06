@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, NavLink, Route, Switch } from "react-router-dom";
+import Playlists from "./Playlists";
 import logo from "../images/logo.png";
 
 function NavBar() {
@@ -12,6 +13,7 @@ function NavBar() {
     });
   };
   return (
+    <div>
     <div class="bg-black">
       <div class="container mx-auto">
         <div className="flex justify-between">
@@ -84,11 +86,12 @@ function NavBar() {
             </NavLink>
           </ul>
         </div>
-        <Switch>
-          <Route path="/upload"></Route>
-          <Route path="/"></Route>
-        </Switch>
       </div>
+    </div>
+    <Switch>
+          <Route path="/upload"></Route>
+          <Route path="/"><Playlists /></Route>
+        </Switch>
     </div>
   );
 }
