@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, NavLink, Route, Switch } from "react-router-dom";
-import logo from "../images/logo.png";
-import axios from 'axios'
-import navigateServices from '../services/navigate'
+import Playlists from "./NavBar";
+import Upload from "./Upload";
 
+import logo from "../images/logo.png";
 import {loginUrl} from '../services/spotify'
 
 
@@ -16,10 +16,6 @@ function NavBar() {
       menu.classList.toggle("hidden");
     });
   };
-
-  const login = () => {
-    navigateServices.getLogin();
-  }
 
   return (
 
@@ -96,8 +92,8 @@ function NavBar() {
           </ul>
         </div>
         <Switch>
-          <Route path="/upload"></Route>
-          <Route path="/"></Route>
+          <Route path="/upload"><Upload /></Route>
+          <Route path="/"><Playlists /></Route>
         </Switch>
       </div>
     </div>
