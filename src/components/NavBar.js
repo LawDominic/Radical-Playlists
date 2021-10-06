@@ -94,7 +94,7 @@ function NavBar() {
         </div>
       </div>
       <Switch>
-        <Route path="/upload"></Route>
+        <Route path="/upload"><Upload /></Route>
         <Route path="/"><Playlists /></Route>
       </Switch>
     </div>
