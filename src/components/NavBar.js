@@ -19,8 +19,8 @@ function NavBar() {
 
   return (
     <div>
-      <div class="bg-black">
-        <div class="container mx-auto">
+      <div className="bg-black">
+        <div className="container mx-auto">
           <div className="flex justify-between">
             <div className="flex space-x-20">
               <Link to="/" className="flex items-center py-4 px-2">
@@ -50,7 +50,7 @@ function NavBar() {
               href={loginUrl}
               className="justify-end my-auto text-white hover:text-green-500 transition duration-300"
             >
-              <button class="bg-green-500 px-5 py-2 text-white rounded-full hover:shadow-2xl hover:bg-green-600">
+              <button className="bg-green-500 px-5 py-2 text-white rounded-full hover:shadow-2xl hover:bg-green-600">
                 <p className="font-semibold">Login</p>
               </button>
             </a>
