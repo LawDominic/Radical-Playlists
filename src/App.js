@@ -2,7 +2,6 @@ import React from 'react';
 import Dashboard from './components/Dashboard';
 import Footer from "./components/Footer"
 import NavBar from "./components/NavBar"
-import Playlists from "./components/Playlists"
 
 const code = new URLSearchParams(window.location.search).get('code')
 

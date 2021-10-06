@@ -15,12 +15,12 @@ function Playlists() {
 
     const like = (e) => {
         e.preventDefault();
-        setLikes(likes++);
+        setLikes(likes + 1);
     };
 
     const dislike = (e) => {
         e.preventDefault();
-        setLikes(likes--);
+        setLikes(likes - 1);
     };
 
     const bookmark = (e) => {
