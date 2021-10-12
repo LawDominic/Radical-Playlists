@@ -14,6 +14,7 @@ function App() {
   const [userID, setUserID] = useState(null)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [accessToken, setAccessToken] = useState(null)
+  const [playlists, setPlaylists] = useState([])
   
 
   const loggedInStatus = (userID) => {
@@ -30,16 +31,17 @@ function App() {
   console.log(`UserID: ${userID}`)
   console.log(`Are we logged in: ${isLoggedIn}`)
   console.log(`Access token is: ${accessToken}`)
+  console.log(`Playlists are: ${playlists}`)
 
   return (
     <div class="min-h-screen h-full bg-gray-100 font-gotham">
       <NavBar />
       <div>
-        {code ? <Spotify code={code} setUserID={setUserID} setAccessToken={setAccessToken}/> : <> </>}
+        {code ? <Spotify code={code} setUserID={setUserID} setAccessToken={setAccessToken} setPlaylists={setPlaylists}/> : <> </>}
       </div>
       <Footer />
       <Switch>
-        <Route path="/upload"><Upload userID={userID} isLoggedIn={isLoggedIn} accessToken={accessToken}/></Route>
+        <Route path="/upload"><Upload userID={userID} isLoggedIn={isLoggedIn} playlists={playlists}/></Route>
         <Route path="/"><Playlists /></Route>
       </Switch>
     </div>
