@@ -1,7 +1,7 @@
 import React from 'react';
 import pImg from "../images/pImg.png";
 
-function UserPlaylists() {
+function UserPlaylists({playlists}) {
 
     const deselectAll = (e) => {
         e.preventDefault();
