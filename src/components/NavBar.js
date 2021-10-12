@@ -4,7 +4,7 @@ import Playlists from "./NavBar";
 // import Upload from "./Upload";
 
 import logo from "../images/logo.png";
-import {loginUrl} from '../services/spotify'
+import {loginUrl} from '../services/spotifyService'
 
 
 function NavBar() {
