@@ -3,7 +3,7 @@ import { Link, NavLink} from "react-router-dom";
 import User from "./User"
 
 import logo from "../images/logo.png";
-import {loginUrl} from '../services/spotify'
+import {loginUrl} from '../services/spotifyService'
 
 function NavBar() {
   const mobileMenuHandler = (event) => {
