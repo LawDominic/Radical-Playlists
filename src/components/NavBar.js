@@ -1,7 +1,6 @@
 import React from "react";
 import { Link, NavLink} from "react-router-dom";
-import Playlists from "./NavBar";
-// import Upload from "./Upload";
+import User from "./User"
 
 import logo from "../images/logo.png";
 import {loginUrl} from '../services/spotify'
@@ -54,6 +53,7 @@ function NavBar() {
                 <p className="font-semibold">Login</p>
               </button>
             </a>
+            <User />
             <div className="md:hidden flex items-center mr-4">
               <button
                 onClick={mobileMenuHandler}
@@ -88,6 +88,18 @@ function NavBar() {
                 className="block text-sm px-2 py-4 text-white font-semibold hover:bg-gray-900 hover:text-green-500 transition duration-300"
               >
                 Upload playlists
+              </NavLink>
+              <a
+                to="/"
+                className="block text-sm px-2 py-4 text-white font-semibold hover:bg-gray-900 hover:text-green-500 transition duration-300"
+              >
+                Spotify Profile
+              </a>
+              <NavLink
+                to="/logout"
+                className="block text-sm px-2 py-4 text-white font-semibold hover:bg-gray-900 hover:text-red-500 transition duration-300"
+              >
+                Logout
               </NavLink>
             </ul>
           </div>
