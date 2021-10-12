@@ -20,14 +20,12 @@ function Playlists() {
 
     const dislike = (e) => {
         e.preventDefault();
-        if(likes === 0){
-           setLikes(likes = 0);
+        if (likes === 0) {
+            setLikes(likes = 0);
         } else {
-            setLikes(likes-1);
+            setLikes(likes - 1);
         }
     };
-
-
 
     const bookmark = (e) => {
         e.preventDefault();
