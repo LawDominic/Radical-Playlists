@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, NavLink} from "react-router-dom";
 import User from "./User"
 
 import logo from "../images/logo.png";
 import {loginUrl} from '../services/spotify'
-
 
 function NavBar() {
   const mobileMenuHandler = (event) => {
@@ -15,6 +14,8 @@ function NavBar() {
       menu.classList.toggle("hidden");
     });
   };
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   return (
     <div>
@@ -45,6 +46,17 @@ function NavBar() {
                 </NavLink>
               </div>
             </div>
+            {/* {isLoggedIn ?
+                <User /> :
+                <a
+                  href={loginUrl}
+                  className="justify-end my-auto text-white hover:text-green-500 transition duration-300"
+                >
+                  <button className="bg-green-500 px-5 py-2 text-white rounded-full hover:shadow-2xl hover:bg-green-600">
+                    <p className="font-semibold">Login</p>
+                  </button>
+                </a>
+            } */}
             <a
               href={loginUrl}
               className="justify-end my-auto text-white hover:text-green-500 transition duration-300"
