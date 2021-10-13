@@ -35,7 +35,7 @@ function App() {
 
   return (
     <div class="min-h-screen h-full bg-gray-100 font-gotham">
-      <NavBar />
+      <NavBar userID={userID} isLoggedIn={isLoggedIn}/>
       <div>
         {code ? <Spotify code={code} setUserID={setUserID} setAccessToken={setAccessToken} setPlaylists={setPlaylists}/> : <> </>}
       </div>
