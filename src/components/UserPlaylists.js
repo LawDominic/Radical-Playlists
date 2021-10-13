@@ -11,31 +11,31 @@ function UserPlaylists() {
         }
     }
     const playlist = [
-        { id: 'p1', playlistName: 'Playlist Name', s1: 'Song Name - Song Aasdasdasdasdr', s2: 'Song Name - Song Artist', s3: 'Song Name - Song Artist' },
+        {id: 'p1', playlistName: 'Playlist Name', s1: 'Song Name - Song Aasdasdasdasdr', s2: 'Song Name - Song Artist', s3: 'Song Name - Song Artist' },
         {id: 'p2', playlistName: 'Playlist Name', s1: 'Song Name - Song Ar', s2: 'Song Name - Song Artist', s3: 'Song Name - Song Artist'} 
     ];
 
     return (
         <div>
-            <div class="grid justify-center mt-10 space-y-10">
+            <div className="grid justify-center mt-10 space-y-10">
                 {playlist.map((list) => {
                     return(
                     <div key={list.id}>
                         <div className="flex">
-                            <label class="inline-flex items-center mr-6">
-                                <input class="text-green-400 w-8 h-8 focus:ring-green-300 focus:ring-opacity-0 border border-gray-300 rounded" type="checkbox" name="playlistCheckbox" />
+                            <label className="inline-flex items-center mr-6">
+                                <input className="text-green-400 w-8 h-8 focus:ring-green-300 focus:ring-opacity-0 border border-gray-300 rounded" type="checkbox" name="playlistCheckbox" />
                             </label>
-                            <div class="relative p-4 bg-white flex space-x-6 rounded-lg shadow-md">
+                            <div className="relative p-4 bg-white flex space-x-6 rounded-lg shadow-md">
                                 <div>
-                                    <img src={`${pImg}`} class="h-24 w-24" />
+                                    <img src={`${pImg}`} className="h-24 w-24" />
                                 </div>
                                 <div>
-                                    <h1 class="text-xl font-bold text-gray-700 mb-1 mr-20">
+                                    <h1 className="text-xl font-bold text-gray-700 mb-1 mr-20">
                                         {list.playlistName}
                                     </h1>
-                                    <p class="text-gray-600 text-sm">{list.s1}</p>
-                                    <p class="text-gray-600 text-sm">{list.s2}</p>
-                                    <p class="text-gray-600 text-sm">{list.s3}</p>
+                                    <p className="text-gray-600 text-sm">{list.s1}</p>
+                                    <p className="text-gray-600 text-sm">{list.s2}</p>
+                                    <p className="text-gray-600 text-sm">{list.s3}</p>
                                 </div>
                             </div>
                         </div>
@@ -52,7 +52,6 @@ function UserPlaylists() {
                 </button>
             </div>
         </div>
-
     )
 }
 
