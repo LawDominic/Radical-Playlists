@@ -47,9 +47,7 @@ const Spotify = ({code, setUserID, setAccessToken, setPlaylists}) => {
   }, [accessToken]);
 
   return (
-    <div>
-    {code}        
-    </div>
+    <></>
   );
 };
 
