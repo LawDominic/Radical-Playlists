@@ -10,10 +10,8 @@ function UserPlaylists({playlists}) {
             x.checked = false
         }
     }
-    const playlist = [
-        { id: 'p1', playlistName: 'Playlist Name', s1: 'Song Name - Song Aasdasdasdasdr', s2: 'Song Name - Song Artist', s3: 'Song Name - Song Artist' },
-        {id: 'p2', playlistName: 'Playlist Name', s1: 'Song Name - Song Ar', s2: 'Song Name - Song Artist', s3: 'Song Name - Song Artist'} 
-    ];
+    const playlist = playlists
+    console.log(playlists[0])
 
     return (
         <div>
@@ -27,13 +25,13 @@ function UserPlaylists({playlists}) {
                             </label>
                             <div class="relative p-4 bg-white flex space-x-6 rounded-lg shadow-md">
                                 <div>
-                                    <img src={`${pImg}`} class="h-24 w-24" />
+                                    <img src={list.images[0].url} class="h-24 w-24" />
                                 </div>
                                 <div>
                                     <h1 class="text-xl font-bold text-gray-700 mb-1 mr-20">
-                                        {list.playlistName}
+                                        {list.name}
                                     </h1>
-                                    <p class="text-gray-600 text-sm">{list.s1}</p>
+                                    <p class="text-gray-600 text-sm">{list.tracks.href}</p>
                                     <p class="text-gray-600 text-sm">{list.s2}</p>
                                     <p class="text-gray-600 text-sm">{list.s3}</p>
                                 </div>
