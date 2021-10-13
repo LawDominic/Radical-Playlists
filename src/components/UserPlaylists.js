@@ -23,7 +23,7 @@ function UserPlaylists({playlists}) {
                             <label class="inline-flex items-center mr-6">
                                 <input class="text-green-400 w-8 h-8 focus:ring-green-300 focus:ring-opacity-0 border border-gray-300 rounded" type="checkbox" name="playlistCheckbox" />
                             </label>
-                            <div class="relative p-4 bg-white flex space-x-6 rounded-lg shadow-md">
+                            <div class="relative p-4 bg-white flex space-x-6 rounded-lg shadow-md w-full">
                                 <div>
                                     <img src={list.images[0].url} class="h-24 w-24" />
                                 </div>
