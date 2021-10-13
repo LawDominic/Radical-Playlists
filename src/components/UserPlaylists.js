@@ -12,6 +12,7 @@ function UserPlaylists({playlists}) {
     }
     const playlist = playlists
     console.log(playlists[0])
+    console.log(playlist)
 
     return (
         <div>
@@ -31,9 +32,9 @@ function UserPlaylists({playlists}) {
                                     <h1 className="text-xl font-bold text-gray-700 mb-1 mr-20">
                                         {list.name}
                                     </h1>
-                                    <p className="text-gray-600 text-sm">{list.tracks.href}</p>
-                                    <p className="text-gray-600 text-sm">{list.s2}</p>
-                                    <p className="text-gray-600 text-sm">{list.s3}</p>
+                                    {list.tracks.items.slice(0, 3).map((item) => {
+                                        return(<p class="text-gray-600 text-sm"><b>Song: </b> {item.track.name} <b>Artist: </b> {item.track.artists[0].name}</p>)
+                                    })}
                                 </div>
                             </div>
                         </div>

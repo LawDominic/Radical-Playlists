@@ -16,6 +16,9 @@ const Spotify = ({code, setUserID, setAccessToken, setPlaylists}) => {
   const accessToken = useAuth(code);
   setAccessToken(accessToken);
 
+
+  let playlistArray = [];
+
   useEffect(() => {
     if (!accessToken) return;
 
@@ -32,19 +35,19 @@ const Spotify = ({code, setUserID, setAccessToken, setPlaylists}) => {
 
       spotifyApi.getUserPlaylists(data.body.id)
         .then(data => {
-          console.log(data.body.items);
-          setPlaylists(data.body.items);
-        })
+
+          data.body.items.map( (item) => 
+              spotifyApi.getPlaylist(item.id).then( data => {
+                   playlistArray.push(data.body);
+              })
+          )
+           setPlaylists(playlistArray);
+        })    
     })
-
-
-
   }, [accessToken]);
 
   return (
-    <div>
-    {code}        
-    </div>
+    <></>
   );
 };
 
