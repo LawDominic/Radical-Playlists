@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import pImg from "../images/pImg.png";
 
-function User() {
+function User({userID}) {
     const ref = useRef();
     const [showUser, setShowUser] = useState(false);
-
+    const baseSpotifyURL = "https://open.spotify.com/user/"
     useEffect(() => {
         const ifOutside = (e) => {
         if (showUser && ref.current && !ref.current.contains(e.target)) {
@@ -34,12 +34,12 @@ function User() {
                     alt="User Profile Image"
                     />
                 </div>
-                <p className="ml-4 my-auto text-white font-semibold">Username</p>
+                <p className="ml-4 my-auto text-white font-semibold">{userID}</p>
                 </button>
                 {showUser ? (
                 <div className="absolute right-0 w-40 mt-2 py-2 bg-white border rounded shadow-xl">
                     <a
-                    href="#"
+                    href={baseSpotifyURL + userID}
                     className="block px-4 py-2 text-gray-900 hover:text-green-500"
                     >
                     Spotify Profile
