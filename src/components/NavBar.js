@@ -5,7 +5,7 @@ import User from "./User"
 import logo from "../images/logo.png";
 import {loginUrl} from '../services/spotifyService'
 
-function NavBar() {
+function NavBar({userID, isLoggedIn}) {
   const mobileMenuHandler = (event) => {
     const btn = document.querySelector("button.mobile-menu-button");
     const menu = document.querySelector(".mobile-menu");
@@ -14,8 +14,6 @@ function NavBar() {
       menu.classList.toggle("hidden");
     });
   };
-
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   return (
     <div>
@@ -46,8 +44,8 @@ function NavBar() {
                 </NavLink>
               </div>
             </div>
-            {/* {isLoggedIn ?
-                <User /> :
+            {isLoggedIn ?
+                <User userID={userID} /> :
                 <a
                   href={loginUrl}
                   className="justify-end my-auto text-white hover:text-green-500 transition duration-300"
@@ -56,16 +54,7 @@ function NavBar() {
                     <p className="font-semibold">Login</p>
                   </button>
                 </a>
-            } */}
-            <a
-              href={loginUrl}
-              className="justify-end my-auto text-white hover:text-green-500 transition duration-300"
-            >
-              <button className="bg-green-500 px-5 py-2 text-white rounded-full hover:shadow-2xl hover:bg-green-600">
-                <p className="font-semibold">Login</p>
-              </button>
-            </a>
-            <User />
+            }
             <div className="md:hidden flex items-center mr-4">
               <button
                 onClick={mobileMenuHandler}
