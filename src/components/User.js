@@ -34,7 +34,7 @@ function User({userID}) {
                     alt="User Profile Image"
                     />
                 </div>
-                <p className="ml-4 my-auto text-white font-semibold">{userID}</p>
+                <p className="ml-4 my-auto text-white font-semibold hover:text-green-500">{userID}</p>
                 </button>
                 {showUser ? (
                 <div className="absolute right-0 w-40 mt-2 py-2 bg-white border rounded shadow-xl">
