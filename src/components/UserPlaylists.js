@@ -33,7 +33,7 @@ function UserPlaylists({playlists}) {
                                         {list.name}
                                     </h1>
                                     {list.tracks.items.slice(0, 3).map((item) => {
-                                        return(<p class="text-gray-600 text-sm">Song: {item.track.name} Artist: {item.track.artists[0].name}</p>)
+                                        return(<p class="text-gray-600 text-sm"><b>Song: </b> {item.track.name} <b>Artist: </b> {item.track.artists[0].name}</p>)
                                     })}
                                 </div>
                             </div>
