@@ -12,6 +12,7 @@ function UserPlaylists({playlists}) {
     }
     const playlist = playlists
     console.log(playlists[0])
+    console.log(playlist)
 
     return (
         <div>
@@ -23,7 +24,7 @@ function UserPlaylists({playlists}) {
                             <label class="inline-flex items-center mr-6">
                                 <input class="text-green-400 w-8 h-8 focus:ring-green-300 focus:ring-opacity-0 border border-gray-300 rounded" type="checkbox" name="playlistCheckbox" />
                             </label>
-                            <div class="relative p-4 bg-white flex space-x-6 rounded-lg shadow-md w-full">
+                            <div class="relative p-4 bg-white flex space-x-6 rounded-lg shadow-md">
                                 <div>
                                     <img src={list.images[0].url} class="h-24 w-24" />
                                 </div>
@@ -31,9 +32,9 @@ function UserPlaylists({playlists}) {
                                     <h1 class="text-xl font-bold text-gray-700 mb-1 mr-20">
                                         {list.name}
                                     </h1>
-                                    <p class="text-gray-600 text-sm">{list.tracks.href}</p>
-                                    <p class="text-gray-600 text-sm">{list.s2}</p>
-                                    <p class="text-gray-600 text-sm">{list.s3}</p>
+                                    {list.tracks.items.slice(0, 3).map((item) => {
+                                        return(<p class="text-gray-600 text-sm">Song: {item.track.name} Artist: {item.track.artists[0].name}</p>)
+                                    })}
                                 </div>
                             </div>
                         </div>
