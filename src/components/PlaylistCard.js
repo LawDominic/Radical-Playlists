@@ -60,7 +60,7 @@ function PlaylistCard({likeCount, pName, pCreator}) {
                 </button>
                 </div>
                 <div>
-                <img src={`${pImg}`} className="h-32 w-32" />
+                    <img src={`${pImg}`} className="h-32 w-32 hidden sm:flex" />
                 </div>
                 <div>
                     <button onClick={bookmark}>

@@ -20,21 +20,21 @@ function UserPlaylists({playlists}) {
                 {playlist.map((list) => {
                     return(
                     <div key={list.id}>
-                        <div className="flex">
+                        <div className="flex px-5 md:px-0">
                             <label className="inline-flex items-center mr-6">
                                 <input className="text-green-400 w-8 h-8 focus:ring-green-300 focus:ring-opacity-0 border border-gray-300 rounded" type="checkbox" name="playlistCheckbox" />
                             </label>
                             <a href={list.external_urls.spotify} target="_blank" rel="noreferrer" className="w-full">
                                 <div className="relative p-4 bg-white flex space-x-6 rounded-lg shadow-md my-auto">
                                     <div>
-                                        <img src={list.images[0].url} className="h-24 w-24" />
+                                        <img src={list.images[0].url} className="h-24 w-24 hidden sm:flex" />
                                     </div>
-                                    <div className="-mt-1">
-                                        <h1 className="text-xl font-bold text-gray-700 mr-20">
+                                    <div className="-mt-1 sm:mt-1 md:-mt-1">
+                                        <h1 className="text-l md:text-xl font-bold text-gray-700 mr-20">
                                             {list.name}
                                         </h1>
                                         {list.tracks.items.slice(0, 3).map((item) => {
-                                            return(<p class="text-gray-600 text-base"><i>{item.track.name}</i> - {item.track.artists[0].name}</p>)
+                                            return(<p class="text-gray-600 text-sm md:text-base"><i>{item.track.name}</i> - {item.track.artists[0].name}</p>)
                                         })}
                                     </div>
                                 </div>
