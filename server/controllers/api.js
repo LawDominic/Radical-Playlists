@@ -47,5 +47,33 @@ apiRouter.post('/login', (req,res) => {
         })
     
     })
+    
+apiRouter.post('/upload', (req, res) => {
+
+    const body = req.body
+    
+    if(body.length === 0){ 
+        return res.status(400).json({
+            error: 'No playlists selected'
+        })
+    }
+
+    for(let playlist of body) {
+
+        const newPlaylist = new Playlist({
+            playlistID: playlist,
+            timestamp: Date.now(),
+            likes: 0
+        })
+
+        newPlaylist.save().then(result => {
+            console.log("playlist saved");
+        })
+
+    }
+    
+})
+
+
 
 module.exports = apiRouter

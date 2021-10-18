@@ -6,6 +6,8 @@ import Playlists from "./components/Playlists"
 import { Switch, Route } from 'react-router-dom';
 import Upload from "./components/Upload";
 
+import playlistService from './services/spotifyService'
+
 const code = new URLSearchParams(window.location.search).get('code')
 
 
@@ -26,7 +28,8 @@ function App() {
   const addPlaylists = (content) => {
     console.log("in add playlists")
     console.log("playlists being sent from app is: " + content)
-    //service here
+    playlistService.create(content, userID)
+    //add then here and update playlists to have removed ones
   }
 
 

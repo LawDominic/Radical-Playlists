@@ -14,11 +14,18 @@ export const loginUrl = `${authEndpoint}?client_id=${clientId}&response_type=cod
   "%20"
 )}`;
 
-// loginUrl = "https://accounts.spotify.com/authorize?client_id=YourClientId&response_type=code&redirect_uri=http://localhost:3000/&scope=streaming%20user-read-email%20user-read-private"
 
+const create = (newObject, user) => {
 
+  console.log("Current user is: " + user)
+ 
+  // User is not logged in - Need to improve error handling
+  if (!user) {
+      return new Promise((res) => res(null))
+  }
 
+  return axios.post("http://localhost:8888/upload", newObject)
+                .then(response => response.data)
+}
 
-// const getPlaylists = (userID) => {
-//   axios.get(`https://api.spotify.com/v1/users/${user_id}/playlists`)
-// }
+export default {create}
