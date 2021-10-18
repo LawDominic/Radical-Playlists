@@ -26,6 +26,18 @@ apiRouter.get('/', (req, res) => {
     console.log('Hello World!')
 })
 
+apiRouter.get('/playlists', (req, res) => {
+    Playlist.find({}).then(result => {
+        console.log("a okay")
+
+        //Iterate over result and make it usable for Playlists.js
+
+
+
+        res.json(result)
+    })
+})
+
 apiRouter.post('/login', (req,res) => {
     //  setup 
         let spotifyApi = new spotifyWebApi(credentials)

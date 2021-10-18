@@ -14,18 +14,22 @@ export const loginUrl = `${authEndpoint}?client_id=${clientId}&response_type=cod
   "%20"
 )}`;
 
+const getAll = () => {
+  return axios.get("http://localhost:8888/playlists")
+                .then(response => response.data)
+}
+
 
 const create = (newObject, user) => {
-
   console.log("Current user is: " + user)
- 
   // User is not logged in - Need to improve error handling
   if (!user) {
       return new Promise((res) => res(null))
   }
-
   return axios.post("http://localhost:8888/upload", newObject)
                 .then(response => response.data)
 }
 
-export default {create}
+
+
+export default {create, getAll}
