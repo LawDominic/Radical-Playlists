@@ -1,5 +1,4 @@
 import React from 'react';
-import pImg from "../images/pImg.png";
 
 function UserPlaylists({playlists}) {
 
@@ -34,7 +33,7 @@ function UserPlaylists({playlists}) {
                                             {list.name}
                                         </h1>
                                         {list.tracks.items.slice(0, 3).map((item) => {
-                                            return(<p class="text-gray-600 text-sm md:text-base"><i>{item.track.name}</i> - {item.track.artists[0].name}</p>)
+                                            return(<p class="text-gray-600 text-sm md:text-base" key={item.uri}><i>{item.track.name}</i> - {item.track.artists[0].name}</p>)
                                         })}
                                     </div>
                                 </div>
