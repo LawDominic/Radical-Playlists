@@ -23,6 +23,12 @@ function App() {
     }
   }
 
+  const addPlaylists = (content) => {
+    console.log("in add playlists")
+    console.log("playlists being sent from app is: " + content)
+    //service here
+  }
+
 
   useEffect(() => {
     loggedInStatus(userID)
@@ -41,7 +47,7 @@ function App() {
       </div>
       <Footer />
       <Switch>
-        <Route path="/upload"><Upload userID={userID} isLoggedIn={isLoggedIn} playlists={playlists}/></Route>
+        <Route path="/upload"><Upload userID={userID} isLoggedIn={isLoggedIn} playlists={playlists} updateFn={addPlaylists}/></Route>
         <Route path="/"><Playlists /></Route>
       </Switch>
     </div>
