@@ -37,11 +37,6 @@ function PlaylistCard({likeCount, pName, pCreator}) {
         setAddBool(!addBool);
     };
 
-    const list = [
-        { id: '1', likes: 0, pName: 'Playlist Name', pCreator: 'Playlist Creator' },
-        { id: '2', likes: 5, pName: 'Playlist Name', pCreator: 'Playlist Creator' }
-    ]
-
     return (
             <div className="relative p-4 bg-white flex items-center space-x-6 rounded-lg shadow-md">
                 <div className="flex flex-col">
@@ -60,7 +55,7 @@ function PlaylistCard({likeCount, pName, pCreator}) {
                 </button>
                 </div>
                 <div>
-                    <img src={`${pImg}`} className="h-32 w-32 hidden sm:flex" />
+                    <img src={`${pImg}`} alt="playlist" className="h-32 w-32 hidden sm:flex" />
                 </div>
                 <div>
                     <button onClick={bookmark}>

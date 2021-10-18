@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, NavLink} from "react-router-dom";
 import User from "./User"
 
@@ -93,7 +93,7 @@ function NavBar({userID, isLoggedIn}) {
                 Upload playlists
               </NavLink>
               <a
-                to="/"
+                href="/"
                 className="block text-sm px-2 py-4 text-white font-semibold hover:bg-gray-900 hover:text-green-500 transition duration-300"
               >
                 Spotify Profile

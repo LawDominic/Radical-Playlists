@@ -4,7 +4,7 @@ import pImg from "../images/pImg.png";
 function User({userID}) {
     const ref = useRef();
     const [showUser, setShowUser] = useState(false);
-    const baseSpotifyURL = "https://open.spotify.com/user/"
+    const spotifyURL = "https://open.spotify.com/user/" + userID
     useEffect(() => {
         const ifOutside = (e) => {
         if (showUser && ref.current && !ref.current.contains(e.target)) {
@@ -31,7 +31,7 @@ function User({userID}) {
                     <img
                     className="h-full w-full object-cover"
                     src={`${pImg}`}
-                    alt="User Profile Image"
+                    alt="User Profile"
                     />
                 </div>
                 <p className="ml-4 my-auto text-white font-semibold hover:text-green-500">{userID}</p>
@@ -39,7 +39,7 @@ function User({userID}) {
                 {showUser ? (
                 <div className="absolute right-0 w-40 mt-2 py-2 bg-white border rounded shadow-xl">
                     <a
-                    href={baseSpotifyURL + userID}
+                    href={spotifyURL}
                     className="block px-4 py-2 text-gray-900 hover:text-green-500"
                     >
                     Spotify Profile
@@ -48,7 +48,7 @@ function User({userID}) {
                         <hr></hr>
                     </div>
                     <a
-                    href="#"
+                    href="/"
                     className="block px-4 py-2 text-gray-900 hover:text-red-500"
                     >
                     Logout
