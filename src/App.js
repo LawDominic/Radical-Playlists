@@ -6,6 +6,8 @@ import Playlists from "./components/Playlists"
 import { Switch, Route } from 'react-router-dom';
 import Upload from "./components/Upload";
 
+import playlistService from './services/spotifyService'
+
 const code = new URLSearchParams(window.location.search).get('code')
 
 
@@ -21,6 +23,13 @@ function App() {
     if(userID) {
       setIsLoggedIn(true)
     }
+  }
+
+  const addPlaylists = (content) => {
+    console.log("in add playlists")
+    console.log("playlists being sent from app is: " + content)
+    playlistService.create(content, userID)
+    //add then here and update playlists to have removed ones
   }
 
 
@@ -41,7 +50,7 @@ function App() {
       </div>
       <Footer />
       <Switch>
-        <Route path="/upload"><Upload userID={userID} isLoggedIn={isLoggedIn} playlists={playlists}/></Route>
+        <Route path="/upload"><Upload userID={userID} isLoggedIn={isLoggedIn} playlists={playlists} updateFn={addPlaylists}/></Route>
         <Route path="/"><Playlists /></Route>
       </Switch>
     </div>

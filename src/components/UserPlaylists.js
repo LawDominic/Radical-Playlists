@@ -1,6 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
+import pImg from "../images/pImg.png";
 
-function UserPlaylists({playlists}) {
+function UserPlaylists({playlists, updateFn}) {
+    
+    const [selectedPlaylists, setSelectedPlaylists] = useState([]);
+
 
     const deselectAll = (e) => {
         e.preventDefault();
@@ -9,19 +13,35 @@ function UserPlaylists({playlists}) {
             x.checked = false
         }
     }
-    const playlist = playlists
-    console.log(playlists[0])
-    console.log(playlist)
+
+    const updatePlaylists = (event) => {
+        console.log(event.target.id)
+        if(event.target.checked) {
+            setSelectedPlaylists([...selectedPlaylists, event.target.id])
+        } else {
+            setSelectedPlaylists(selectedPlaylists.filter((item) => item != event.target.id))
+        }
+        
+    }
+
+    const uploadPlaylists = (e) => {
+        e.preventDefault();
+        console.log("Playlists getting uploaded: ", selectedPlaylists)
+        updateFn(selectedPlaylists)
+        setSelectedPlaylists([])
+    }
+
+    const availablePlaylists = playlists
 
     return (
         <div>
             <div className="grid justify-center mt-10 space-y-10">
-                {playlist.map((list) => {
+                {availablePlaylists.map((list) => {
                     return(
                     <div key={list.id}>
                         <div className="flex px-5 md:px-0">
                             <label className="inline-flex items-center mr-6">
-                                <input className="text-green-400 w-8 h-8 focus:ring-green-300 focus:ring-opacity-0 border border-gray-300 rounded" type="checkbox" name="playlistCheckbox" />
+                                <input id={list.id} className="text-green-400 w-8 h-8 focus:ring-green-300 focus:ring-opacity-0 border border-gray-300 rounded" type="checkbox" name="playlistCheckbox" onChange={updatePlaylists}/>
                             </label>
                             <a href={list.external_urls.spotify} target="_blank" rel="noreferrer" className="w-full">
                                 <div className="relative p-4 bg-white flex space-x-6 rounded-lg shadow-md my-auto">
@@ -47,7 +67,7 @@ function UserPlaylists({playlists}) {
                 <button onClick={deselectAll} className="bg-red-500 px-5 py-2 text-white rounded-full hover:bg-red-600">
                     Deselect all
                 </button>
-                <button className="bg-green-500 px-5 py-2 text-white rounded-full hover:bg-green-600">
+                <button onClick={uploadPlaylists} className="bg-green-500 px-5 py-2 text-white rounded-full hover:bg-green-600">
                     Upload
                 </button>
             </div>
