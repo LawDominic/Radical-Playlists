@@ -1,33 +1,51 @@
 import React, {useState, useEffect} from "react";
 import PlaylistCard from "./PlaylistCard"
-
+import SpotifyWebApi from "spotify-web-api-node";
 import playlistService from "../services/spotifyService"
 
-function Playlists() {
+//temporary value for likeCount
 
-    const [uploadedPlaylists, setUploadedPlaylist] = useState([])
+function Playlists({playlists, accessToken}) {
+    
+    const [formattedPlaylists, setFormattedPlaylists] = useState([])
+   
+
+    const spotifyApi = new SpotifyWebApi({
+        clientId: "7b215911d14245089d73d78055353cb2", //might be wrong clientID
+    });
+    
+    const formatPlaylist =   () => {
+        if (!accessToken) return;
+        spotifyApi.setAccessToken(accessToken);
+    
+        
+        playlists.map((playlist) => {
+          spotifyApi
+            .getPlaylist(playlist.playlistID)
+            .then((data) => {
+                setFormattedPlaylists(arr => [...arr, data.body])
+            })
+        })   
+      };
+    
+      
 
     useEffect(() => {
-        playlistService.getAll()
-            .then(response => {
-                console.log(response)
-                setUploadedPlaylist(response)
-            })
-    }, [])
-
-    const list = [
-        { id: '1', likes: 0, pName: 'Playlist Name', pCreator: 'Playlist Creator' },
-        { id: '2', likes: 5, pName: 'Playlist Name', pCreator: 'Playlist Creator' }
-    ]   
+        formatPlaylist()
+    }, [])  
+    
 
     return (
         <div className="grid items-center justify-center mt-10 space-y-10">
-            {list.map((list) => {
-                return (
+            {formattedPlaylists.map((list) => {
+                
+                    return (
                     <div key={list.id}>
-                        <PlaylistCard likeCount={list.likes} pName={list.pName} pCreator={list.pCreator} />
+                        <PlaylistCard likeCount={0} pName={list.name} pCreator={list.owner.display_name} imgSrc={list.images[0].url} /> 
+                        
                     </div>
-                )
+                    )
+               
             })}
         </div>
     );

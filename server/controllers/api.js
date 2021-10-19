@@ -28,7 +28,6 @@ apiRouter.get('/', (req, res) => {
 
 apiRouter.get('/playlists', (req, res) => {
     Playlist.find({}).then(result => {
-        console.log("a okay")
 
         //Iterate over result and make it usable for Playlists.js
 

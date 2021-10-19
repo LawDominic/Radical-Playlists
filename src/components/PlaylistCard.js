@@ -8,7 +8,7 @@ import { CheckIcon } from "@heroicons/react/solid";
 
 import pImg from "../images/pImg.png";
 
-function PlaylistCard({likeCount, pName, pCreator}) {
+function PlaylistCard({likeCount, pName, pCreator, imgSrc}) {
     const [likes, setLikes] = useState(likeCount);
     const [bookmarkBool, setBookmarkBool] = useState(false);
     const [addBool, setAddBool] = useState(false);
@@ -55,7 +55,7 @@ function PlaylistCard({likeCount, pName, pCreator}) {
                 </button>
                 </div>
                 <div>
-                    <img src={`${pImg}`} alt="playlist" className="h-32 w-32 hidden sm:flex" />
+                    <img src={`${imgSrc}`} alt="playlist" className="h-32 w-32 hidden sm:flex" />
                 </div>
                 <div>
                     <button onClick={bookmark}>

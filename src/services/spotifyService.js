@@ -1,4 +1,7 @@
 import axios from "axios";
+import SpotifyWebApi from "spotify-web-api-node";
+
+import useAuth from "./useAuth";
 
 const authEndpoint = "https://accounts.spotify.com/authorize";
 const redirectUri = "http://localhost:3000/";
@@ -30,6 +33,11 @@ const create = (newObject, user) => {
                 .then(response => response.data)
 }
 
+const formatPlaylists = (playlists, code) => {
+
+ 
+}
 
 
-export default {create, getAll}
+
+export default {create, getAll, formatPlaylists}

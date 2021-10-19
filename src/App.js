@@ -1,59 +1,73 @@
-import {React, useEffect, useState} from 'react';
-import Spotify from './components/Spotify';
-import Footer from "./components/Footer"
-import NavBar from "./components/NavBar"
-import Playlists from "./components/Playlists"
-import { Switch, Route } from 'react-router-dom';
+import { React, useEffect, useState } from "react";
+import { Switch, Route } from "react-router-dom";
+
+import Footer from "./components/Footer";
+import NavBar from "./components/NavBar";
+import Playlists from "./components/Playlists";
+import Spotify from "./components/Spotify";
 import Upload from "./components/Upload";
 
-import playlistService from './services/spotifyService'
+import playlistService from "./services/spotifyService";
 
-const code = new URLSearchParams(window.location.search).get('code')
-
+const code = new URLSearchParams(window.location.search).get("code");
 
 function App() {
- 
-  const [userID, setUserID] = useState(null)
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [accessToken, setAccessToken] = useState(null)
-  const [playlists, setPlaylists] = useState([])
   
+  const [userID, setUserID] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [accessToken, setAccessToken] = useState(null);
+  const [userPlaylists, setUserPlaylists] = useState([]);
+  const [allPlaylists, setAllPlaylists] = useState([]);
 
+  const [playlistCounter, setPlaylistCounter] = useState(0);
+  
   const loggedInStatus = (userID) => {
-    if(userID) {
-      setIsLoggedIn(true)
+    if (userID) {
+      setIsLoggedIn(true);
     }
-  }
+  };
 
   const addPlaylists = (content) => {
-    console.log("in add playlists")
-    console.log("playlists being sent from app is: " + content)
-    playlistService.create(content, userID)
+    playlistService.create(content, userID); 
+    setPlaylistCounter(playlistCounter+1);
     //add then here and update playlists to have removed ones
-  }
-
+  };
 
   useEffect(() => {
-    loggedInStatus(userID)
-  })
+    loggedInStatus(userID); // Get logged in status once
+    console.log("Are we logged in? :", isLoggedIn);
+  });
 
-  console.log(`UserID: ${userID}`)
-  console.log(`Are we logged in: ${isLoggedIn}`)
-  console.log(`Access token is: ${accessToken}`)
-  console.log(`Playlists are: ${playlists}`)
+  useEffect(() => {
+    playlistService.getAll()
+      .then((response) => {
+        console.log("Playlists we have obtained from MongoDB are : ", response);
+        setAllPlaylists(response);
+        setPlaylistCounter(response.length);
+      })
+  }, [playlistCounter]);
+
+  // console.log(`UserID: ${userID}`)
+  // console.log(`Are we logged in: ${isLoggedIn}`)
+  // console.log(`Access token is: ${accessToken}`)
+  // console.log(`Playlists are: ${userPlaylists}`)
 
   return (
     <div className="min-h-screen h-full bg-gray-100 font-gotham">
-      <NavBar userID={userID} isLoggedIn={isLoggedIn}/>
+      <NavBar userID={userID} isLoggedIn={isLoggedIn} />
       <div>
-        {code ? <Spotify code={code} setUserID={setUserID} setAccessToken={setAccessToken} setPlaylists={setPlaylists}/> : <> </>}
+        {code ? (<Spotify code={code} setUserID={setUserID} setAccessToken={setAccessToken} setPlaylists={setUserPlaylists}/>) : (<> </>)}
       </div>
       <Footer />
       <Switch>
-        <Route path="/upload"><Upload userID={userID} isLoggedIn={isLoggedIn} playlists={playlists} updateFn={addPlaylists}/></Route>
-        <Route path="/"><Playlists /></Route>
+        <Route path="/upload">
+          <Upload userID={userID} isLoggedIn={isLoggedIn} playlists={userPlaylists} updateFn={addPlaylists}/>
+        </Route>
+        <Route path="/">
+          {isLoggedIn && (<Playlists code={code} accessToken={accessToken} playlists={allPlaylists}/>)}
+        </Route>
       </Switch>
     </div>
   );
 }
-export default App
+export default App;

@@ -1,12 +1,11 @@
-
-
 import React, { useEffect } from "react";
 import useAuth from "../services/useAuth";
 import SpotifyWebApi from "spotify-web-api-node";
 
 
 
-const Spotify = ({code, setUserID, setAccessToken, setPlaylists}) => {
+
+const Spotify = ({ code, setUserID, setAccessToken, setPlaylists }) => {
 
   // Setting the spotifyApi, so that we can use it's functions
   const spotifyApi = new SpotifyWebApi({
@@ -14,41 +13,32 @@ const Spotify = ({code, setUserID, setAccessToken, setPlaylists}) => {
   });
 
   const accessToken = useAuth(code);
-  setAccessToken(accessToken);
-
-
-  let playlistArray = [];
+  
+  let userPlaylistArray = [];
 
   useEffect(() => {
-    if (!accessToken) return;
-
-
+    setAccessToken(accessToken);
     
-    // Setting Up the spotifyApi with AccessToken so that we can use its functions anywhere in the component without setting AccessToken value again & again. 
+    if (!accessToken) return;
+    
     spotifyApi.setAccessToken(accessToken);
     console.log("token is: " + spotifyApi.getAccessToken());
-    // Get user details with help of getMe() function
-    spotifyApi.getMe().then(data => {
-      console.log(data);
-      console.log(data.body.id); //Need to pass back this value
+    
+    spotifyApi.getMe().then((data) => { // Get user details with help of getMe() function
       setUserID(data.body.id);
-
-      spotifyApi.getUserPlaylists(data.body.id)
-        .then(data => {
-
-          data.body.items.map( (item) => 
-              spotifyApi.getPlaylist(item.id).then( data => {
-                   playlistArray.push(data.body);
-              })
-          )
-           setPlaylists(playlistArray);
-        })    
-    })
+      
+      spotifyApi.getUserPlaylists(data.body.id).then((data) => { // Obtain public playlists for a user and push them to an array
+        data.body.items.map((item) =>
+          spotifyApi.getPlaylist(item.id).then((data) => {
+            userPlaylistArray.push(data.body);
+          })
+        );
+        setPlaylists(userPlaylistArray);
+      });
+    });
   }, [accessToken]);
 
-  return (
-    <></>
-  );
+  return <></>;
 };
 
 export default Spotify;
