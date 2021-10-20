@@ -1,5 +1,5 @@
 import React from 'react';
-import UserPlaylists from './UserPlaylists';
+import UserPlaylists from '../components/UserPlaylists';
 
 function Upload({userID, isLoggedIn, playlists, updateFn}) {
     

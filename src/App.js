@@ -3,9 +3,9 @@ import { Switch, Route } from "react-router-dom";
 
 import Footer from "./components/Footer";
 import NavBar from "./components/NavBar";
-import Playlists from "./components/Playlists";
 import Spotify from "./components/Spotify";
-import Upload from "./components/Upload";
+import Playlists from "./pages/Playlists";
+import Upload from "./pages/Upload";
 
 import playlistService from "./services/spotifyService";
 

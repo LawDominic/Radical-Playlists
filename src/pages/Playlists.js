@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import PlaylistCard from "./PlaylistCard"
+import PlaylistCard from "../components/PlaylistCard";
 import SpotifyWebApi from "spotify-web-api-node";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 
