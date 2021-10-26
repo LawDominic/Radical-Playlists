@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import pImg from "../images/pImg.png";
+import SearchBar from "../components/SearchBar";
 
 function UserPlaylists({playlists, updateFn}) {
     
@@ -35,6 +36,7 @@ function UserPlaylists({playlists, updateFn}) {
 
     return (
         <div>
+            <SearchBar/>
             <div className="grid justify-center mt-10 space-y-10">
                 {availablePlaylists.map((list) => {
                     return(

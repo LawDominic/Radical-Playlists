@@ -7,7 +7,9 @@ function Upload({userID, isLoggedIn, playlists, updateFn}) {
         <div className="container mx-auto h-full">
             {isLoggedIn ?
                 <UserPlaylists playlists={playlists} updateFn={updateFn}/> :
-                <div className="text-center">You're currently not logged in. Please do so to access this feature.</div>
+                <div className="text-center">You're currently not logged in. Please do so to access this feature.
+                </div>
+                
             }
         </div>
     )

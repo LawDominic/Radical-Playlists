@@ -2,7 +2,6 @@ import React from "react";
 import { Link, NavLink} from "react-router-dom";
 import User from "./User"
 
-import SearchBar from "../components/SearchBar";
 
 import logo from "../images/logo.png";
 import {loginUrl} from '../services/spotifyService'
@@ -48,7 +47,6 @@ function NavBar({userID, isLoggedIn}) {
                 </NavLink>
               </div>
             </div>
-            <SearchBar/>
             <div className="invisible md:visible my-auto z-10">
               {isLoggedIn ?
                   <User userID={userID} /> :
