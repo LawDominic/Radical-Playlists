@@ -2,6 +2,7 @@ import { React, useEffect, useState } from "react";
 import { Switch, Route } from "react-router-dom";
 
 import Footer from "./components/Footer";
+import Landing from "./components/Landing";
 import NavBar from "./components/NavBar";
 import Spotify from "./components/Spotify";
 import Playlists from "./pages/Playlists";
@@ -53,20 +54,22 @@ function App() {
   // console.log(`Playlists are: ${userPlaylists}`)
 
   return (
-    <div className="min-h-screen h-full bg-gray-100 font-gotham">
+    <div className="min-h-screen bg-gray-100 font-gotham">
       <NavBar userID={userID} isLoggedIn={isLoggedIn} />
       <div>
         {code ? (<Spotify code={code} setUserID={setUserID} setAccessToken={setAccessToken} setPlaylists={setUserPlaylists}/>) : (<> </>)}
       </div>
-      <Footer />
       <Switch>
         <Route path="/upload">
           <Upload userID={userID} isLoggedIn={isLoggedIn} playlists={userPlaylists} updateFn={addPlaylists}/>
         </Route>
         <Route path="/">
-          {isLoggedIn && (<Playlists code={code} accessToken={accessToken} playlists={allPlaylists}/>)}
+          {isLoggedIn ? (<Playlists code={code} accessToken={accessToken} playlists={allPlaylists}/>)
+          : <Landing />
+        }
         </Route>
       </Switch>
+      <div className="mt-10"><Footer /></div>
     </div>
   );
 }
