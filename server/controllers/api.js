@@ -89,7 +89,12 @@ apiRouter.put('/likes/:id', (req, res) => {
     const newLikes = req.body
     console.log("Here")
     console.log(newLikes);
-    res.json(newLikes)
+    //add like stuff here
+
+    Playlist.findOneAndUpdate({playlistID: req.body.playlistID}, {likes: req.body.newValue})
+    .then(result => {
+        res.json(result)
+    })
 })
 
 

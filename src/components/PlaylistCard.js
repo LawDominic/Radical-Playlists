@@ -17,16 +17,22 @@ function PlaylistCard({likeCount, pName, pCreator, imgSrc, playlistID}) {
 
     const like = (e) => {
         e.preventDefault();
+        playlistService.updateLikes(playlistID, likes+1);
         setLikes(likes + 1);
+        
     };
 
     const dislike = (e) => {
         e.preventDefault();
         if (likes === 0) {
+            playlistService.updateLikes(playlistID, likes)
             setLikes(0);
+            
         } else {
+            playlistService.updateLikes(playlistID, likes-1)
             setLikes(likes - 1);
         }
+
     };
 
     const bookmark = (e) => {
@@ -40,9 +46,9 @@ function PlaylistCard({likeCount, pName, pCreator, imgSrc, playlistID}) {
     };
 
 
-    useEffect(() => {
-        playlistService.updateLikes(playlistID, likes)
-    }, [likes])
+    
+    
+    
 
     return (
             <div className="relative p-4 bg-white flex items-center space-x-6 rounded-lg shadow-md">
