@@ -25,6 +25,7 @@ function Playlists({playlists, accessToken}) {
             .then((data) => {
                 const newItem = data.body
                 newItem.likes = playlist.likes
+                newItem.timestamp = playlist.timestamp
                 setFormattedPlaylists(arr => [...arr, newItem])
             })
         })   
@@ -37,16 +38,22 @@ function Playlists({playlists, accessToken}) {
     const filterState = (e) => {
         console.log(e.target.value);
         switch(e.target.value) {
-            case "Newest": setFormattedPlaylists(formattedPlaylists.sort(function(a, b){return b.timestamp - a.timestamp}));
+            case "Newest": setFormattedPlaylists(formattedPlaylists.slice().sort(function(a, b){return new Date(b.timestamp) - new Date(a.timestamp)}));
             console.log(formattedPlaylists)
-            case "Oldest":setFormattedPlaylists(formattedPlaylists.sort(function(a, b){return b.timestamp - a.timestamp}));
+            break;
+            case "Oldest":setFormattedPlaylists(formattedPlaylists.slice().sort(function(a, b){return new Date(a.timestamp) - new Date(b.timestamp)}));
             console.log(formattedPlaylists)
-            case "Ascending likes": setFormattedPlaylists(formattedPlaylists.sort(function(a, b){return a.likes - b.likes}));
+            break;
+            case "Ascending likes": setFormattedPlaylists(formattedPlaylists.slice().sort(function(a, b){return a.likes - b.likes}));
             console.log(formattedPlaylists)
-            case "Descending likes": setFormattedPlaylists(formattedPlaylists.sort(function(a, b){return b.likes - a.likes}));
+            break;
+            case "Descending likes": setFormattedPlaylists(formattedPlaylists.slice().sort(function(a, b){return b.likes - a.likes}));
             console.log(formattedPlaylists)
+            break;
         }
     }
+
+    
 
     return (
         <div className="grid items-center justify-center mt-10 space-y-10">
