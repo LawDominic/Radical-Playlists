@@ -23,10 +23,11 @@ function Playlists({playlists, accessToken}) {
         spotifyApi
             .getPlaylist(playlist.playlistID)
             .then((data) => {
+                console.log('data', data.body)
                 const newItem = data.body
                 newItem.likes = playlist.likes
                 newItem.timestamp = playlist.timestamp
-                setFormattedPlaylists(arr => [...arr, newItem])
+                setFormattedPlaylists(arr => [...arr, newItem].sort(function(a, b){return new Date(b.timestamp) - new Date(a.timestamp)}) )
             })
         })   
     };
