@@ -39,6 +39,7 @@ function User({userID}) {
                 {showUser ? (
                 <div className="absolute right-0 w-40 mt-2 py-2 bg-white border rounded shadow-xl">
                     <a
+                    target="_blank"
                     href={spotifyURL}
                     className="block px-4 py-2 text-gray-900 hover:text-green-500"
                     >
