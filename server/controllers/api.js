@@ -80,9 +80,21 @@ apiRouter.post('/upload', (req, res) => {
         newPlaylist.save().then(result => {
             console.log("playlist saved");
         })
-
     }
-    
+})
+
+
+apiRouter.put('/likes/:id', (req, res) => {
+    const playlistID = req.params
+    const newLikes = req.body
+    console.log("Here")
+    console.log(newLikes);
+    //add like stuff here
+
+    Playlist.findOneAndUpdate({playlistID: req.body.playlistID}, {likes: req.body.newValue})
+    .then(result => {
+        res.json(result)
+    })
 })
 
 

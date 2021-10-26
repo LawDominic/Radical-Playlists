@@ -33,11 +33,11 @@ const create = (newObject, user) => {
                 .then(response => response.data)
 }
 
-const formatPlaylists = (playlists, code) => {
-
- 
+const updateLikes = (playlistID, newValue) => {
+    return axios.put("http://localhost:8888/likes/" + playlistID, {playlistID, newValue})
+            .then(response => response.data)
 }
 
 
 
-export default {create, getAll, formatPlaylists}
+export default {create, getAll, updateLikes}

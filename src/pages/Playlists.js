@@ -3,6 +3,8 @@ import PlaylistCard from "../components/PlaylistCard";
 import SpotifyWebApi from "spotify-web-api-node";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 
+import playlistService from "../services/spotifyService";
+
 //temporary value for likeCount
 
 function Playlists({playlists, accessToken}) {
@@ -16,13 +18,14 @@ function Playlists({playlists, accessToken}) {
     const formatPlaylist =   () => {
         if (!accessToken) return;
         spotifyApi.setAccessToken(accessToken);
-    
         
         playlists.map((playlist) => {
         spotifyApi
             .getPlaylist(playlist.playlistID)
             .then((data) => {
-                setFormattedPlaylists(arr => [...arr, data.body])
+                const newItem = data.body
+                newItem.likes = playlist.likes
+                setFormattedPlaylists(arr => [...arr, newItem])
             })
         })   
     };
@@ -60,7 +63,7 @@ function Playlists({playlists, accessToken}) {
             {formattedPlaylists.map((list) => {
                     return (
                     <div key={list.id}>
-                        <PlaylistCard likeCount={0} pName={list.name} pCreator={list.owner.id} imgSrc={list.images[0].url} /> 
+                        <PlaylistCard likeCount={list.likes} pName={list.name} pCreator={list.owner.id} imgSrc={list.images[0].url} playlistID={list.id} /> 
                     </div>
                     )
             })}
