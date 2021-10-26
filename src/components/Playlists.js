@@ -60,7 +60,7 @@ function Playlists({playlists, accessToken}) {
             {formattedPlaylists.map((list) => {
                     return (
                     <div key={list.id}>
-                        <PlaylistCard likeCount={0} pName={list.name} pCreator={list.owner.id} imgSrc={list.images[0].url} /> 
+                        <PlaylistCard likeCount={0} pName={list.name} pCreator={list.owner.id} imgSrc={list.images[0].url} playlistID={list.id} /> 
                     </div>
                     )
             })}

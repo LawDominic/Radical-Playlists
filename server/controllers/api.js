@@ -86,5 +86,14 @@ apiRouter.post('/upload', (req, res) => {
 })
 
 
+apiRouter.put('/likes/:id', (req, res) => {
+    
+    const playlistID = req.params
+    const newLikes = req.body
+    console.log("Here")
+    console.log(newLikes);
+})
+
+
 
 module.exports = apiRouter

@@ -1,4 +1,4 @@
-import {React, useState} from 'react'
+import {React, useState, useEffect} from 'react'
 import { PlusCircleIcon } from "@heroicons/react/outline";
 import { BookmarkIcon } from "@heroicons/react/outline";
 import { BookmarkIcon as BookmarkSolidIcon } from "@heroicons/react/solid";
@@ -8,7 +8,9 @@ import { CheckIcon } from "@heroicons/react/solid";
 
 import pImg from "../images/pImg.png";
 
-function PlaylistCard({likeCount, pName, pCreator, imgSrc}) {
+import playlistService from "../services/spotifyService";
+
+function PlaylistCard({likeCount, pName, pCreator, imgSrc, playlistID}) {
     const [likes, setLikes] = useState(likeCount);
     const [bookmarkBool, setBookmarkBool] = useState(false);
     const [addBool, setAddBool] = useState(false);
@@ -22,6 +24,7 @@ function PlaylistCard({likeCount, pName, pCreator, imgSrc}) {
         e.preventDefault();
         if (likes === 0) {
             setLikes(0);
+            playlistService.updateLikes(playlistID, likes)
         } else {
             setLikes(likes - 1);
         }
@@ -36,6 +39,11 @@ function PlaylistCard({likeCount, pName, pCreator, imgSrc}) {
         e.preventDefault();
         setAddBool(!addBool);
     };
+
+
+    useEffect(() => {
+        
+    }, [likes])
 
     return (
             <div className="relative p-4 bg-white flex items-center space-x-6 rounded-lg shadow-md">
