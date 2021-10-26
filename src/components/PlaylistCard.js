@@ -24,7 +24,6 @@ function PlaylistCard({likeCount, pName, pCreator, imgSrc, playlistID}) {
         e.preventDefault();
         if (likes === 0) {
             setLikes(0);
-            playlistService.updateLikes(playlistID, likes)
         } else {
             setLikes(likes - 1);
         }
@@ -42,7 +41,7 @@ function PlaylistCard({likeCount, pName, pCreator, imgSrc, playlistID}) {
 
 
     useEffect(() => {
-        
+        playlistService.updateLikes(playlistID, likes)
     }, [likes])
 
     return (
