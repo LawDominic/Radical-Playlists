@@ -29,7 +29,7 @@ const create = (newObject, user) => {
   if (!user) {
       return new Promise((res) => res(null))
   }
-  return axios.post("http://localhost:8888/upload", newObject)
+  return axios.post("http://localhost:8888/upload", {newObject, user})
                 .then(response => response.data)
 }
 

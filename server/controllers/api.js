@@ -62,24 +62,38 @@ apiRouter.post('/login', (req,res) => {
 apiRouter.post('/upload', (req, res) => {
 
     const body = req.body
-    
+
+
     if(body.length === 0){ 
         return res.status(400).json({
             error: 'No playlists selected'
         })
     }
 
-    for(let playlist of body) {
+    for(let playlist of body.newObject) {
 
         const newPlaylist = new Playlist({
             playlistID: playlist,
             timestamp: Date.now(),
-            likes: 0
+            likes: 0,
+            userID: body.user.id
         })
 
         newPlaylist.save().then(result => {
             console.log("playlist saved");
         })
+
+        
+        
+        User.findOne({userID: body.user.id})
+            .then(response => {
+                const newList = response.uploadedPlaylists.concat(playlist)
+                User.findOneAndUpdate({userID: body.user.id}, {uploadedPlaylists: newList})
+                .then(result => {
+                    res.json(result)
+                })
+            })
+
     }
 })
 
@@ -108,7 +122,8 @@ apiRouter.get('/users/:id', (req, res) => {
 apiRouter.post('/users', (req, res) => {
     const newUser = new User({
         userID: req.body.userID,
-        favoritePlaylists: []
+        favoritePlaylists: [],
+        uploadedPlaylists: []
     })
 
     newUser.save().then(result => {

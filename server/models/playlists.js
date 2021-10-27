@@ -18,11 +18,13 @@ const playlistSchema = new mongoose.Schema({
   playlistID: String,
   timestamp: Date,
   likes: Number,
+  userID: String
 });
 
 const userSchema = new mongoose.Schema({
   userID: String,
   favoritePlaylists: Array,
+  uploadedPlaylists: Array
 });
 
 playlistSchema.set("toJSON", {
