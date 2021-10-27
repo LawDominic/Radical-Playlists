@@ -1,7 +1,7 @@
 require('dotenv').config()
 
 const express = require('express')
-const Playlist = require("../models/playlists")
+const {Playlist, User} = require("../models/playlists")
 const cors = require('cors')
 const spotifyWebApi = require('spotify-web-api-node')
 
@@ -96,6 +96,27 @@ apiRouter.put('/likes/:id', (req, res) => {
         res.json(result)
     })
 })
+
+apiRouter.get('/users/:id', (req, res) => {
+    const userID = req.params.id
+    User.findOne({userID: userID})
+    .then(result =>{
+        res.json(result)
+    })
+})
+
+apiRouter.post('/users', (req, res) => {
+    const newUser = new User({
+        userID: req.body.userID,
+        favoritePlaylists: []
+    })
+
+    newUser.save().then(result => {
+        console.log("user saved")
+    })
+}) 
+
+apiRouter.get('/')
 
 
 
