@@ -1,11 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import placeholder from "../images/placeholder.png";
-import SearchBar from "../components/SearchBar";
 
 function UserPlaylists({playlists, updateFn}) {
     
     const [selectedPlaylists, setSelectedPlaylists] = useState([]);
-
+    const [availablePlaylists, setAvailablePlaylists] = useState(playlists);
 
     const deselectAll = (e) => {
         e.preventDefault();
@@ -32,11 +31,35 @@ function UserPlaylists({playlists, updateFn}) {
         setSelectedPlaylists([])
     }
 
-    const availablePlaylists = playlists
+    const filterPlaylists = (e) => {
+        console.log("asdasd");
+        var input = e.target.value
+        var filtered = []
+        if (input.length > 0) {
+            for (let i = 0; i < playlists.length; i++) {
+                if (playlists[i].name.includes(input)) {
+                    filtered.push(playlists[i])
+                }
+            }
+            setAvailablePlaylists(filtered)
+        } else {
+            setAvailablePlaylists(playlists)
+        }
+    }
+
+    useEffect(() => {
+        setAvailablePlaylists(availablePlaylists)
+    }, [])
 
     return (
         <div>
-            <SearchBar/>
+            <div className="text-center mt-4">
+                    <input className="p-2 rounded-md focus:ring-0 focus:ring-black border-none"
+                        type="text"
+                        placeholder="Search Playlists"
+                        onChange={filterPlaylists}
+                    />
+            </div>
             <div className="grid justify-center mt-10 space-y-10">
                 {availablePlaylists.map((list) => {
                     return(
