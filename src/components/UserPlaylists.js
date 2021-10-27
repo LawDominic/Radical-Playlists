@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import pImg from "../images/pImg.png";
+import placeholder from "../images/placeholder.png";
 import SearchBar from "../components/SearchBar";
 
 function UserPlaylists({playlists, updateFn}) {
@@ -48,7 +48,7 @@ function UserPlaylists({playlists, updateFn}) {
                             <a href={list.external_urls.spotify} target="_blank" rel="noreferrer" className="w-full">
                                 <div className="relative p-4 bg-white flex space-x-6 rounded-lg shadow-md my-auto">
                                     <div>
-                                        <img src={list.images[0].url} alt="playlist" className="h-24 w-24 hidden sm:flex" />
+                                        <img src={list.images[0] ? list.images[0].url : placeholder} alt="playlist" className="h-24 w-24 hidden sm:flex" />
                                     </div>
                                     <div className="-mt-1 sm:mt-1 md:-mt-1">
                                         <h1 className="text-l md:text-xl font-bold text-gray-700 mr-20">
