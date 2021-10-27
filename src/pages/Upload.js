@@ -3,7 +3,7 @@ import UserPlaylists from '../components/UserPlaylists';
 import {loginUrl} from '../services/spotifyService'
 import bg from "../images/bg.jpg"
 
-function Upload({userID, isLoggedIn, playlists, updateFn}) {
+function Upload({isLoggedIn, playlists, updateFn}) {
     
     return (
         <div>

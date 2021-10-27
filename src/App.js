@@ -14,7 +14,7 @@ const code = new URLSearchParams(window.location.search).get("code");
 
 function App() {
   
-  const [userID, setUserID] = useState(null);
+  const [user, setUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [accessToken, setAccessToken] = useState(null);
   const [userPlaylists, setUserPlaylists] = useState([]);
@@ -22,21 +22,21 @@ function App() {
 
   const [playlistCounter, setPlaylistCounter] = useState(0);
   
-  const loggedInStatus = (userID) => {
-    if (userID) {
+  const loggedInStatus = (user) => {
+    if (user) {
       setIsLoggedIn(true);
     }
   };
 
   const addPlaylists = (content) => {
-    playlistService.create(content, userID); 
+    playlistService.create(content, user); 
     setPlaylistCounter(playlistCounter+1);
     //add then here and update playlists to have removed ones
   };
 
   useEffect(() => {
-    loggedInStatus(userID); // Get logged in status once
-    console.log("Are we logged in? :", isLoggedIn);
+    loggedInStatus(user); // Get logged in status once
+    console.log("user", user);
   });
 
   useEffect(() => {
@@ -55,13 +55,13 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-100 font-gotham">
-      <NavBar userID={userID} isLoggedIn={isLoggedIn} />
+      <NavBar user={user} isLoggedIn={isLoggedIn} />
       <div>
-        {code ? (<Spotify code={code} setUserID={setUserID} setAccessToken={setAccessToken} setPlaylists={setUserPlaylists}/>) : (<> </>)}
+        {code ? (<Spotify code={code} setUser={setUser} setAccessToken={setAccessToken} setPlaylists={setUserPlaylists}/>) : (<> </>)}
       </div>
       <Switch>
         <Route path="/upload">
-          <Upload userID={userID} isLoggedIn={isLoggedIn} playlists={userPlaylists} updateFn={addPlaylists}/>
+          <Upload isLoggedIn={isLoggedIn} playlists={userPlaylists} updateFn={addPlaylists}/>
         </Route>
         <Route path="/">
           {isLoggedIn ? (<Playlists code={code} accessToken={accessToken} playlists={allPlaylists}/>)

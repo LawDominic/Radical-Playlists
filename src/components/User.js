@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import pImg from "../images/pImg.png";
+import pImg from "../images/defaultprofile.png";
 
-function User({userID}) {
+function User({user}) {
     const ref = useRef();
     const [showUser, setShowUser] = useState(false);
-    const spotifyURL = "https://open.spotify.com/user/" + userID
+    const spotifyURL = "https://open.spotify.com/user/" + user.id
     useEffect(() => {
         const ifOutside = (e) => {
         if (showUser && ref.current && !ref.current.contains(e.target)) {
@@ -30,11 +30,12 @@ function User({userID}) {
                 <div className="block h-10 w-10 rounded-full overflow-hidden focus:outline-none">
                     <img
                     className="h-full w-full object-cover"
-                    src={`${pImg}`}
+                    src={user.images[0] ? user.images[0].url : pImg }
+                    
                     alt="User Profile"
                     />
                 </div>
-                <p className="ml-4 my-auto text-white font-semibold hover:text-green-500">{userID}</p>
+                <p className="ml-4 my-auto text-white font-semibold hover:text-green-500">{user.id}</p>
                 </button>
                 {showUser ? (
                 <div className="absolute right-0 w-40 mt-2 py-2 bg-white border rounded shadow-xl">

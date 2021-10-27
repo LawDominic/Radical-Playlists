@@ -5,7 +5,7 @@ import SpotifyWebApi from "spotify-web-api-node";
 
 
 
-const Spotify = ({ code, setUserID, setAccessToken, setPlaylists }) => {
+const Spotify = ({ code, setUser, setAccessToken, setPlaylists }) => {
 
   // Setting the spotifyApi, so that we can use it's functions
   const spotifyApi = new SpotifyWebApi({
@@ -25,7 +25,8 @@ const Spotify = ({ code, setUserID, setAccessToken, setPlaylists }) => {
     console.log("token is: " + spotifyApi.getAccessToken());
     
     spotifyApi.getMe().then((data) => { // Get user details with help of getMe() function
-      setUserID(data.body.id);
+      setUser(data.body);
+     
       
       spotifyApi.getUserPlaylists(data.body.id).then((data) => { // Obtain public playlists for a user and push them to an array
         data.body.items.map((item) =>

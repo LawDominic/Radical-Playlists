@@ -8,7 +8,7 @@ import {loginUrl} from '../services/spotifyService'
 
 
 
-function NavBar({userID, isLoggedIn}) {
+function NavBar({user, isLoggedIn}) {
   const mobileMenuHandler = (event) => {
     const btn = document.querySelector("button.mobile-menu-button");
     const menu = document.querySelector(".mobile-menu");
@@ -49,7 +49,7 @@ function NavBar({userID, isLoggedIn}) {
             </div>
             <div className="invisible md:visible my-auto z-10">
               {isLoggedIn ?
-                  <User userID={userID} /> :
+                  <User user={user} /> :
                   <a
                     href={loginUrl}
                     className="justify-end text-white hover:text-green-500 transition duration-300"
