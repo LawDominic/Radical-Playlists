@@ -32,7 +32,6 @@ function UserPlaylists({playlists, updateFn}) {
     }
 
     const filterPlaylists = (e) => {
-        console.log("asdasd");
         var input = e.target.value
         var filtered = []
         if (input.length > 0) {
