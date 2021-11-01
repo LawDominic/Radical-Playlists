@@ -40,27 +40,21 @@ function Playlists({playlists, accessToken}) {
         console.log(e.target.value);
         switch(e.target.value) {
             case "Newest": setFormattedPlaylists(formattedPlaylists.slice().sort(function(a, b){return new Date(b.timestamp) - new Date(a.timestamp)}));
-            console.log(formattedPlaylists)
             break;
             case "Oldest":setFormattedPlaylists(formattedPlaylists.slice().sort(function(a, b){return new Date(a.timestamp) - new Date(b.timestamp)}));
-            console.log(formattedPlaylists)
             break;
             case "Ascending likes": setFormattedPlaylists(formattedPlaylists.slice().sort(function(a, b){return a.likes - b.likes}));
-            console.log(formattedPlaylists)
             break;
             case "Descending likes": setFormattedPlaylists(formattedPlaylists.slice().sort(function(a, b){return b.likes - a.likes}));
-            console.log(formattedPlaylists)
             break;
         }
     }
 
-    
-
     return (
-        <div className="grid items-center justify-center mt-10 space-y-10">
-            <div className="relative flex flex-row-reverse focus:ring-0 focus:outline-none ring-transparent">
+        <div className="grid items-center justify-center mt-10 space-y-10 px-2">
+            <div className="relative flex flex-row-reverse focus:ring-0 focus:outline-none ring-transparent mx-auto">
                 <ChevronDownIcon className="w-2 h-2 absolute top-0 right-0 m-4 pointer-events-none" />
-                <select onChange={filterState} class="border border-gray-400 rounded-lg text-gray-900 h-10 pl-2 pr-10 bg-white hover:border-gray-400 focus:ring-0 focus:outline-none ring-transparent">
+                <select onChange={filterState} class="border border-gray-400 rounded-lg text-gray-900 h-10 pl-2 pr-10 focus:ring-0 focus:outline-none ring-transparent">
                     <option>Newest</option>
                     <option>Oldest</option>
                     <option>Ascending likes</option>

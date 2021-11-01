@@ -1,12 +1,10 @@
-import {React, useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import { PlusCircleIcon } from "@heroicons/react/outline";
 import { BookmarkIcon } from "@heroicons/react/outline";
 import { BookmarkIcon as BookmarkSolidIcon } from "@heroicons/react/solid";
 import { ChevronDoubleUpIcon } from "@heroicons/react/solid";
 import { ChevronDoubleDownIcon } from "@heroicons/react/solid";
 import { CheckIcon } from "@heroicons/react/solid";
-
-import pImg from "../images/pImg.png";
 
 import playlistService from "../services/spotifyService";
 
@@ -53,19 +51,19 @@ function PlaylistCard({likeCount, pName, pCreator, imgSrc, playlistID}) {
     return (
             <div className="relative p-4 bg-white flex items-center space-x-6 rounded-lg shadow-md">
                 <div className="flex flex-col">
-                <button
-                onClick={like}
-                className="hover:text-blue-400 font-normal py-1 px-1 rounded justify-center"
-                >
-                    <ChevronDoubleUpIcon className="h-4 text-gray-900 hover:text-green-600" />
-                </button>
-                <p className="text-center">{likes}</p>
-                <button
-                onClick={dislike}
-                className="hover:text-blue-400 font-normal py-1 px-1 rounded justify-center"
-                >
-                    <ChevronDoubleDownIcon className="h-4 text-gray-900 hover:text-red-600" />
-                </button>
+                    <button
+                    onClick={like}
+                    className="hover:text-blue-400 font-normal py-1 px-1 rounded justify-center"
+                    >
+                        <ChevronDoubleUpIcon className="h-4 text-gray-900 hover:text-green-600" />
+                    </button>
+                    <p className="text-center">{likes}</p>
+                    <button
+                    onClick={dislike}
+                    className="hover:text-blue-400 font-normal py-1 px-1 rounded justify-center"
+                    >
+                        <ChevronDoubleDownIcon className="h-4 text-gray-900 hover:text-red-600" />
+                    </button>
                 </div>
                 <div>
                     <img src={`${imgSrc}`} alt="playlist" className="h-32 w-32 hidden sm:flex" />

@@ -19,7 +19,7 @@ function UserPlaylists({playlists, updateFn}) {
         if(event.target.checked) {
             setSelectedPlaylists([...selectedPlaylists, event.target.id])
         } else {
-            setSelectedPlaylists(selectedPlaylists.filter((item) => item != event.target.id))
+            setSelectedPlaylists(selectedPlaylists.filter((item) => item !== event.target.id))
         }
         
     }
@@ -63,7 +63,7 @@ function UserPlaylists({playlists, updateFn}) {
                 {availablePlaylists.map((list) => {
                     return(
                     <div key={list.id}>
-                        <div className="flex px-5 md:px-0">
+                        <div className="flex px-2 md:px-0">
                             <label className="inline-flex items-center mr-6">
                                 <input id={list.id} className="text-green-400 w-8 h-8 focus:ring-green-300 focus:ring-opacity-0 border border-gray-300 rounded" type="checkbox" name="playlistCheckbox" onChange={updatePlaylists}/>
                             </label>
