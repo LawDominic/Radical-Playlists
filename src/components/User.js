@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
+import { ShieldExclamationIcon } from "@heroicons/react/outline";
 import pImg from "../images/defaultprofile.png";
 
 function User({user}) {
     const ref = useRef();
     const [showUser, setShowUser] = useState(false);
+    const [deleteModal, setDeleteModal] = useState(false)
     const spotifyURL = "https://open.spotify.com/user/" + user.id
     useEffect(() => {
         const ifOutside = (e) => {
@@ -23,7 +25,13 @@ function User({user}) {
         e.stopPropagation();
         setShowUser(!showUser);
     };
+
+    const deleteAccount = (e) => {
+        e.preventDefault();
+    }
+
     return (
+        <div>
         <div className="flex my-auto justify-center">
             <div className="relative" ref={ref}>
                 <button onClick={toggleUser} className="flex flex-row">
@@ -55,9 +63,44 @@ function User({user}) {
                     >
                     Logout
                     </a>
+                    <div className="py-2">
+                        <hr></hr>
+                    </div>
+                    <p
+                    href="/"
+                    className="block px-4 py-2 text-gray-900 hover:text-red-500 text-sm"
+                    onClick={() => {setDeleteModal(!deleteModal); setShowUser(false)}}
+                    >
+                    Delete your data
+                    </p>
                 </div>
                 ) : null}
             </div>
+        </div>
+        {deleteModal ? 
+            <div class="flex flex-col space-y- min-w-screen h-screen animated fadeIn faster fixed left-0 top-0 justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-gray-900 bg-opacity-90">
+                <div class="flex flex-col p-8 bg-white rounded-2xl">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <ShieldExclamationIcon className="h-12 w-12 text-red-600 rounded-xl bg-red-100 p-2"/>
+                            <div class="flex flex-col ml-3">
+                                <div class="font-medium leading-none">Confirmation</div>
+                                <p class="text-sm text-gray-600 leading-none mt-1">By deleting your account you will lose all your data.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="flex mx-auto items-center justify-center space-x-2 mt-6">
+                        <button onClick={() => {setDeleteModal(false)}} className="bg-gray-100 px-5 py-2 text-gray-900 rounded-full hover:bg-gray-200 shadow-md">
+                            Cancel
+                        </button>
+                        <button onClick={deleteAccount} className="bg-red-500 px-5 py-2 text-white rounded-full hover:bg-red-600 shadow-md">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+        : null}
         </div>
     );
 }
