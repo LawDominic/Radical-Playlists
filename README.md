@@ -172,14 +172,14 @@ Communication was managed through a private Discord group, utilising both the te
 
 ## Wireframes
 <strong>Main Page</strong>
-* <img src=".src/images/wireframe1.png" alt="Main page wireframe">
+* <img src="/src/images/wireframe1.png" alt="Main page wireframe">
 
 <strong>Upload Playlist Page</strong>
-* <img src=".src/images/wireframe2.png" alt="Upload Playlist Wireframe">
+* <img src="/src/images/wireframe2.png" alt="Upload Playlist Wireframe">
 
 ## Mockups
 <strong>Main Page</strong>
-* <img src=".src/images/mockup1.png" alt="Main Page Mockup">
+* <img src="/src/images/mockup1.png" alt="Main Page Mockup">
 
 <strong>Upload Playlist Page</strong>
-* <img src=".src/images/mockup2.png" alt="Upload Playlist Mockup">
+* <img src="/src/images/mockup2.png" alt="Upload Playlist Mockup">
