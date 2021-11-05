@@ -140,6 +140,12 @@ apiRouter.post('/favourites', (req, res) => {
     })
 })
 
+apiRouter.delete('/favourites/:userID/:playlistID', (req, res) => {
+    User.findOneAndUpdate({userID: req.params.userID}, {$pull: {favoritePlaylists: req.params.playlistID}})
+    .then(() => {
+        res.send("deleted")});
+})
+
 apiRouter.get('/')
 
 

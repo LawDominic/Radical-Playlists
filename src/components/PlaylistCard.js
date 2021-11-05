@@ -40,10 +40,12 @@ function PlaylistCard({likeCount, pName, pCreator, imgSrc, playlistID, user}) {
     const bookmark = (e) => {
         e.preventDefault();
         const userID = user.id;
-        console.log(userID)
         if(!bookmarkBool){
             axios.post("http://localhost:8888/favourites", {userID, playlistID})
             .then(response => response.data)
+        } else {
+            axios.delete(`http://localhost:8888/favourites/${userID}/${playlistID}`)
+            .then(response => response.data);
         }
         setBookmarkBool(!bookmarkBool);
     };
