@@ -58,7 +58,15 @@ function PlaylistCard({likeCount, pName, pCreator, imgSrc, playlistID, user}) {
 
 
     
-    
+    useEffect(() => {
+        const userID = user.id;
+        axios.get(`http://localhost:8888/favourites/${userID}`)
+        .then(response => {
+            if(response.data.favoritePlaylists.includes(playlistID)){
+                setBookmarkBool(true)
+            }
+        });
+    }, [])
     
 
     return (

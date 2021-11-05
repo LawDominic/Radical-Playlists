@@ -131,6 +131,12 @@ apiRouter.post('/users', (req, res) => {
     })
 }) 
 
+apiRouter.get('/favourites/:userID', (req, res) =>{
+    User.findOne({userID: req.params.userID})
+    .then(result => {
+        res.json(result)
+    })
+})
 
 apiRouter.post('/favourites', (req, res) => {
 
