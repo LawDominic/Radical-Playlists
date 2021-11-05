@@ -131,6 +131,15 @@ apiRouter.post('/users', (req, res) => {
     })
 }) 
 
+
+apiRouter.post('/favourites', (req, res) => {
+
+    User.findOneAndUpdate({userID: req.body.userID}, {$push: {favoritePlaylists: req.body.playlistID}})
+    .then(result => {
+        res.json(result)
+    })
+})
+
 apiRouter.get('/')
 
 

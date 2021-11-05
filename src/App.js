@@ -64,7 +64,7 @@ function App() {
           <Upload isLoggedIn={isLoggedIn} playlists={userPlaylists} updateFn={addPlaylists}/>
         </Route>
         <Route path="/">
-          {isLoggedIn ? (<Playlists code={code} accessToken={accessToken} playlists={allPlaylists}/>)
+          {isLoggedIn ?  (<Playlists code={code} accessToken={accessToken} playlists={allPlaylists} user={user}/>)
           : <Landing />
         }
         </Route>

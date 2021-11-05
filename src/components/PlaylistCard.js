@@ -9,8 +9,10 @@ import { CheckIcon } from "@heroicons/react/solid";
 import pImg from "../images/pImg.png";
 
 import playlistService from "../services/spotifyService";
+import axios from 'axios';
 
-function PlaylistCard({likeCount, pName, pCreator, imgSrc, playlistID}) {
+function PlaylistCard({likeCount, pName, pCreator, imgSrc, playlistID, user}) {
+    
     const [likes, setLikes] = useState(likeCount);
     const [bookmarkBool, setBookmarkBool] = useState(false);
     const [addBool, setAddBool] = useState(false);
@@ -37,10 +39,17 @@ function PlaylistCard({likeCount, pName, pCreator, imgSrc, playlistID}) {
 
     const bookmark = (e) => {
         e.preventDefault();
+        const userID = user.id;
+        console.log(userID)
+        if(!bookmarkBool){
+            axios.post("http://localhost:8888/favourites", {userID, playlistID})
+            .then(response => response.data)
+        }
         setBookmarkBool(!bookmarkBool);
     };
 
     const add = (e) => {
+        console.log(user)
         e.preventDefault();
         setAddBool(!addBool);
     };
