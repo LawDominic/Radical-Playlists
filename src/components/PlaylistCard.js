@@ -7,8 +7,10 @@ import { ChevronDoubleDownIcon } from "@heroicons/react/solid";
 import { CheckIcon } from "@heroicons/react/solid";
 
 import playlistService from "../services/spotifyService";
+import axios from 'axios';
 
-function PlaylistCard({likeCount, pName, pCreator, imgSrc, playlistID}) {
+function PlaylistCard({likeCount, pName, pCreator, imgSrc, playlistID, user}) {
+    
     const [likes, setLikes] = useState(likeCount);
     const [bookmarkBool, setBookmarkBool] = useState(false);
     const [addBool, setAddBool] = useState(false);
@@ -35,17 +37,34 @@ function PlaylistCard({likeCount, pName, pCreator, imgSrc, playlistID}) {
 
     const bookmark = (e) => {
         e.preventDefault();
+        const userID = user.id;
+        if(!bookmarkBool){
+            axios.post("http://localhost:8888/favourites", {userID, playlistID})
+            .then(response => response.data)
+        } else {
+            axios.delete(`http://localhost:8888/favourites/${userID}/${playlistID}`)
+            .then(response => response.data);
+        }
         setBookmarkBool(!bookmarkBool);
     };
 
     const add = (e) => {
+        console.log(user)
         e.preventDefault();
         setAddBool(!addBool);
     };
 
 
     
-    
+    useEffect(() => {
+        const userID = user.id;
+        axios.get(`http://localhost:8888/favourites/${userID}`)
+        .then(response => {
+            if(response.data.favoritePlaylists.includes(playlistID)){
+                setBookmarkBool(true)
+            }
+        });
+    }, [])
     
 
     return (

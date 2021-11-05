@@ -1,7 +1,7 @@
 require('dotenv').config()
 
 const express = require('express')
-const Playlist = require("../models/playlists")
+const {Playlist, User} = require("../models/playlists")
 const cors = require('cors')
 const spotifyWebApi = require('spotify-web-api-node')
 
@@ -62,24 +62,38 @@ apiRouter.post('/login', (req,res) => {
 apiRouter.post('/upload', (req, res) => {
 
     const body = req.body
-    
+
+
     if(body.length === 0){ 
         return res.status(400).json({
             error: 'No playlists selected'
         })
     }
 
-    for(let playlist of body) {
+    for(let playlist of body.newObject) {
 
         const newPlaylist = new Playlist({
             playlistID: playlist,
             timestamp: Date.now(),
-            likes: 0
+            likes: 0,
+            userID: body.user.id
         })
 
         newPlaylist.save().then(result => {
             console.log("playlist saved");
         })
+
+        
+        
+        User.findOne({userID: body.user.id})
+            .then(response => {
+                const newList = response.uploadedPlaylists.concat(playlist)
+                User.findOneAndUpdate({userID: body.user.id}, {uploadedPlaylists: newList})
+                .then(result => {
+                    res.json(result)
+                })
+            })
+
     }
 })
 
@@ -96,6 +110,49 @@ apiRouter.put('/likes/:id', (req, res) => {
         res.json(result)
     })
 })
+
+apiRouter.get('/users/:id', (req, res) => {
+    const userID = req.params.id
+    User.findOne({userID: userID})
+    .then(result =>{
+        res.json(result)
+    })
+})
+
+apiRouter.post('/users', (req, res) => {
+    const newUser = new User({
+        userID: req.body.userID,
+        favoritePlaylists: [],
+        uploadedPlaylists: []
+    })
+
+    newUser.save().then(result => {
+        console.log("user saved")
+    })
+}) 
+
+apiRouter.get('/favourites/:userID', (req, res) =>{
+    User.findOne({userID: req.params.userID})
+    .then(result => {
+        res.json(result)
+    })
+})
+
+apiRouter.post('/favourites', (req, res) => {
+
+    User.findOneAndUpdate({userID: req.body.userID}, {$push: {favoritePlaylists: req.body.playlistID}})
+    .then(result => {
+        res.json(result)
+    })
+})
+
+apiRouter.delete('/favourites/:userID/:playlistID', (req, res) => {
+    User.findOneAndUpdate({userID: req.params.userID}, {$pull: {favoritePlaylists: req.params.playlistID}})
+    .then(() => {
+        res.send("deleted")});
+})
+
+apiRouter.get('/')
 
 
 

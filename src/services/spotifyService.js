@@ -29,7 +29,7 @@ const create = (newObject, user) => {
   if (!user) {
       return new Promise((res) => res(null))
   }
-  return axios.post("http://localhost:8888/upload", newObject)
+  return axios.post("http://localhost:8888/upload", {newObject, user})
                 .then(response => response.data)
 }
 
@@ -38,6 +38,14 @@ const updateLikes = (playlistID, newValue) => {
             .then(response => response.data)
 }
 
+const checkForUser =  (userID) => {
+   return axios.get("http://localhost:8888/users/" + userID )
+            .then(response => response.data)
+}
 
+const createUser = (userID) => {
+  return axios.post("http://localhost:8888/users", {userID})
+          .then(response => response.data)
+}
 
-export default {create, getAll, updateLikes}
+export default {create, getAll, updateLikes, checkForUser, createUser}

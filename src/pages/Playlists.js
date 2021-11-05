@@ -7,7 +7,7 @@ import playlistService from "../services/spotifyService";
 
 //temporary value for likeCount
 
-function Playlists({playlists, accessToken}) {
+function Playlists({playlists, accessToken, user}) {
     
     const [formattedPlaylists, setFormattedPlaylists] = useState([])
 
@@ -51,8 +51,9 @@ function Playlists({playlists, accessToken}) {
     }
 
     return (
-        <div className="grid items-center justify-center mt-10 space-y-10 px-2">
-            <div className="relative flex flex-row-reverse focus:ring-0 focus:outline-none ring-transparent mx-auto">
+        
+        <div className="grid items-center justify-center mt-10 space-y-10">
+            <div className="relative flex flex-row-reverse focus:ring-0 focus:outline-none ring-transparent">
                 <ChevronDownIcon className="w-2 h-2 absolute top-0 right-0 m-4 pointer-events-none" />
                 <select onChange={filterState} class="border border-gray-400 rounded-lg text-gray-900 h-10 pl-2 pr-10 focus:ring-0 focus:outline-none ring-transparent">
                     <option>Newest</option>
@@ -62,10 +63,11 @@ function Playlists({playlists, accessToken}) {
                     <option>Favourites</option>
                 </select>
             </div>
+            
             {formattedPlaylists.map((list) => {
                     return (
                     <div key={list.id}>
-                        <PlaylistCard likeCount={list.likes} pName={list.name} pCreator={list.owner.id} imgSrc={list.images[0].url} playlistID={list.id} /> 
+                        <PlaylistCard likeCount={list.likes} pName={list.name} pCreator={list.owner.id} imgSrc={list.images[0].url} playlistID={list.id} user={user}/> 
                     </div>
                     )
             })}
