@@ -15,6 +15,8 @@
 * <a href="#source-code-guide">Source code guide</a>
 * <a href="#next-steps">Next steps</a>
 * <a href="#team-roles-and-contributions">Team roles and contributions</a>
+* <a href="#Wireframes">Wireframes</a>
+* <a href="#Mockups">Mockups</a>
 
 ## Outline of the application
 
