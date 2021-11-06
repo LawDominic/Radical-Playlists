@@ -1,5 +1,6 @@
 import { React, useEffect, useState } from "react";
 import { Switch, Route } from "react-router-dom";
+import { useHistory } from 'react-router';
 
 import Footer from "./components/Footer";
 import Landing from "./components/Landing";
@@ -29,9 +30,11 @@ function App() {
     }
   };
 
+  const history = useHistory();
   const addPlaylists = (content) => {
     playlistService.create(content, user); 
     setPlaylistCounter(playlistCounter+1);
+    
     //add then here and update playlists to have removed ones
   };
 
@@ -46,6 +49,7 @@ function App() {
         // console.log("Playlists we have obtained from MongoDB are : ", response);
         setAllPlaylists(response);
         setPlaylistCounter(response.length);
+        history.push('/')
       })
   }, [playlistCounter]);
 

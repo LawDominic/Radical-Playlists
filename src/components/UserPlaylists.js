@@ -35,6 +35,7 @@ function UserPlaylists({playlists, updateFn}) {
         updateFn(selectedPlaylists)
         setSelectedPlaylists([])
     }
+    
 
     const filterPlaylists = (e) => {
         var input = e.target.value
