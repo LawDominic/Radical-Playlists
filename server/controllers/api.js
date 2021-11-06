@@ -1,11 +1,10 @@
 require("dotenv").config();
-
 const express = require("express");
-const { Playlist, User } = require("../models/playlists");
 const cors = require("cors");
-const spotifyWebApi = require("spotify-web-api-node");
 
-// const apiRouter = express.Router();
+const { Playlist, User } = require("../models/playlists");
+
+const spotifyWebApi = require("spotify-web-api-node");
 
 const apiRouter = express();
 
@@ -18,40 +17,33 @@ const credentials = {
   redirectUri: "http://localhost:3000/",
 };
 
-apiRouter.get("/", (req, res) => {
-  console.log("Hello World!");
-});
-
+// Get all playlists from database
 apiRouter.get("/playlists", (req, res) => {
   Playlist.find({}).then((result) => {
-    //Iterate over result and make it usable for Playlists.js
-
     res.json(result);
   });
 });
 
 apiRouter.post("/login", (req, res) => {
-  //  setup
+  // setup
   let spotifyApi = new spotifyWebApi(credentials);
 
-  //  Get the "code" value posted from the client-side and get the user's accessToken from the spotify api
+  // Get the "code" value posted from the client-side and get the user's accessToken from the spotify api
   const code = req.body.code;
 
   // Retrieve an access token
-  spotifyApi
-    .authorizationCodeGrant(code)
-    .then((data) => {
-      // Returning the User's AccessToken in the json formate
+  spotifyApi.authorizationCodeGrant(code)
+    .then((data) => { // Returning the User's AccessToken in the json format
       res.json({
         accessToken: data.body.access_token,
       });
-    })
-    .catch((err) => {
+    }).catch((err) => {
       console.log(err);
       res.sendStatus(400);
     });
 });
 
+// Upload the playlist to the database
 apiRouter.post("/upload", (req, res) => {
   const body = req.body;
 
@@ -85,12 +77,10 @@ apiRouter.post("/upload", (req, res) => {
   }
 });
 
+// Update likes of a playlist
 apiRouter.put("/likes/:id", (req, res) => {
   const playlistID = req.params;
   const newLikes = req.body;
-  console.log("Here");
-  console.log(newLikes);
-  //add like stuff here
 
   Playlist.findOneAndUpdate(
     { playlistID: req.body.playlistID },
@@ -135,6 +125,9 @@ apiRouter.post("/favourites", (req, res) => {
 });
 
 apiRouter.delete("/favourites/:userID/:playlistID", (req, res) => {
+  
+  //Add authentication
+  
   User.findOneAndUpdate(
     { userID: req.params.userID },
     { $pull: { favoritePlaylists: req.params.playlistID } }
@@ -155,7 +148,5 @@ apiRouter.delete("/users/:userID", (req, res) => {
     });
   });
 });
-
-apiRouter.get("/");
 
 module.exports = apiRouter;

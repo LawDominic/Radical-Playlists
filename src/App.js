@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import Landing from "./components/Landing";
 import NavBar from "./components/NavBar";
 import Spotify from "./components/Spotify";
+
 import Playlists from "./pages/Playlists";
 import Upload from "./pages/Upload";
 
@@ -36,40 +37,39 @@ function App() {
 
   useEffect(() => {
     loggedInStatus(user); // Get logged in status once
-    console.log("user", user);
+    // console.log("user", user);
   });
 
   useEffect(() => {
     playlistService.getAll()
       .then((response) => {
-        console.log("Playlists we have obtained from MongoDB are : ", response);
+        // console.log("Playlists we have obtained from MongoDB are : ", response);
         setAllPlaylists(response);
         setPlaylistCounter(response.length);
       })
   }, [playlistCounter]);
 
-  // console.log(`UserID: ${userID}`)
-  // console.log(`Are we logged in: ${isLoggedIn}`)
-  // console.log(`Access token is: ${accessToken}`)
-  // console.log(`Playlists are: ${userPlaylists}`)
-
   return (
     <div className="min-h-screen bg-gray-100 font-gotham">
       <NavBar user={user} isLoggedIn={isLoggedIn} />
+      
       <div>
-        {code ? (<Spotify code={code} setUser={setUser} setAccessToken={setAccessToken} setPlaylists={setUserPlaylists}/>) : (<> </>)}
+        {code ? <Spotify code={code} setUser={setUser} setAccessToken={setAccessToken} setPlaylists={setUserPlaylists}/> : <> </>}
       </div>
+      
       <Switch>
         <Route path="/upload">
           <Upload isLoggedIn={isLoggedIn} playlists={userPlaylists} updateFn={addPlaylists}/>
         </Route>
+        
         <Route path="/">
-          {isLoggedIn ?  (<Playlists code={code} accessToken={accessToken} playlists={allPlaylists} user={user}/>)
-          : <Landing />
-        }
+          {isLoggedIn ? <Playlists code={code} accessToken={accessToken} playlists={allPlaylists} user={user}/> : <Landing />}
         </Route>
       </Switch>
-      <div className="mt-10"><Footer /></div>
+
+      <div className="mt-10"> 
+        <Footer /> 
+      </div>
     </div>
   );
 }
