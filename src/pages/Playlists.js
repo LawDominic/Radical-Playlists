@@ -6,8 +6,6 @@ import { ChevronDownIcon } from "@heroicons/react/solid";
 
 import PlaylistCard from "../components/PlaylistCard";
 
-import playlistService from "../services/spotifyService";
-
 function Playlists({playlists, accessToken, user}) {
     
     const [formattedPlaylists, setFormattedPlaylists] = useState([])
@@ -35,10 +33,10 @@ function Playlists({playlists, accessToken, user}) {
     const updatePlaylist = (listID, type) => {
         const newList = formattedPlaylists
         
-        if (type == "like") {
-            newList[newList.indexOf(newList.find(playlist => playlist.id ==  listID))].likes++
-        } else if (type == "dislike") {
-            newList[newList.indexOf(newList.find(playlist => playlist.id ==  listID))].likes--
+        if (type === "like") {
+            newList[newList.indexOf(newList.find(playlist => playlist.id === listID))].likes++
+        } else if (type === "dislike") {
+            newList[newList.indexOf(newList.find(playlist => playlist.id === listID))].likes--
         }
         setFormattedPlaylists(newList)
     }
@@ -57,6 +55,7 @@ function Playlists({playlists, accessToken, user}) {
             break;
             case "Descending likes": setFormattedPlaylists(formattedPlaylists.slice().sort(function(a, b) {return b.likes - a.likes}));
             break;
+            default: console.log("error occurred")
         }
     }
 
