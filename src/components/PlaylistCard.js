@@ -88,7 +88,7 @@ function PlaylistCard({likeCount, pName, pCreator, imgSrc, playlistID, user, upd
                 </div>
                 
                 <div>
-                    <a target="_blank"rel="noreferrer" href={`${basePlaylistURL}/${playlistID}`}>
+                    <a target="_blank"rel="noreferrer" href={`${basePlaylistURL}${playlistID}`}>
                         <img src={`${imgSrc}`} alt="playlist" className="h-32 w-32 hidden sm:flex" />
                     </a>
                 </div>
@@ -113,7 +113,7 @@ function PlaylistCard({likeCount, pName, pCreator, imgSrc, playlistID, user, upd
                 </div>
                 
                 <div>
-                    <a target="_blank"rel="noreferrer" href={`${basePlaylistURL}/${playlistID}`}>
+                    <a target="_blank"rel="noreferrer" href={`${basePlaylistURL}${playlistID}`}>
                         <h1 className="text-xl font-bold text-gray-700 mb-1 mr-20">{pName}</h1>
                         <p className="text-gray-600 text-sm italic">{pCreator}</p>
                     </a>
