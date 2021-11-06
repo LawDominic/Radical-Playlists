@@ -35,12 +35,35 @@ const Spotify = ({ code, setUser, setAccessToken, setPlaylists }) => {
         } 
     });
         
-    spotifyApi.getUserPlaylists(data.body.id).then((data) => { // Obtain public playlists for a user and push them to an array
-      data.body.items.map((item) =>
-        spotifyApi.getPlaylist(item.id).then((data) => {
-          userPlaylistArray.push(data.body);
-        })
-      );
+    spotifyApi.getUserPlaylists(data.body.id).then((res) => { // Obtain public playlists for a user and push them to an array
+     
+      let uploadedPlaylists;
+      spotifyService.checkForUser(data.body.id)
+      .then(response => uploadedPlaylists = response.uploadedPlaylists).then(() => {
+        for(let item of res.body.items){
+          console.log('item'. item)
+          if(!uploadedPlaylists.includes(item.id)){
+  
+            spotifyApi.getPlaylist(item.id).then((res) => {
+            
+              userPlaylistArray.push(res.body);
+            })
+          }
+        }
+      })
+
+      
+     
+      // res.body.items.map((item) =>
+      //   spotifyApi.getPlaylist(item.id).then((res) => {
+          
+      //     userPlaylistArray.push(res.body);
+      //   })
+      // );
+
+      
+
+
       setPlaylists(userPlaylistArray);
     });
   });

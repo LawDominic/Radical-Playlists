@@ -1,10 +1,15 @@
 import React, {useState, useEffect} from 'react';
+
 import placeholder from "../images/placeholder.png";
+
+import playlistService from "../services/spotifyService";
 
 function UserPlaylists({playlists, updateFn}) {
     
     const [selectedPlaylists, setSelectedPlaylists] = useState([]);
     const [availablePlaylists, setAvailablePlaylists] = useState(playlists);
+
+    const [uploadedPlaylists, setUploadedPlaylists] = useState([]);
 
     const deselectAll = (e) => {
         e.preventDefault();
@@ -49,6 +54,10 @@ function UserPlaylists({playlists, updateFn}) {
     }
 
     useEffect(() => {
+        console.log('user', playlistService.checkForUser())
+        // setUploadedPlaylists(playlistService.checkForUsers())
+        // const playlistsToUpload = availablePlaylists.filter(playlist => !uploadedPlaylists.includes(playlist));
+
         setAvailablePlaylists(availablePlaylists)
     }, [])
 

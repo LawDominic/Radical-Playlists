@@ -1,9 +1,5 @@
 import axios from "axios";
 
-import SpotifyWebApi from "spotify-web-api-node";
-
-import useAuth from "./useAuth";
-
 const authEndpoint = "https://accounts.spotify.com/authorize";
 const redirectUri = "http://localhost:3000/";
 const clientId = "ada1fd60bef74c76b3e699ac0282da8d";
@@ -40,6 +36,7 @@ const checkForUser =  (userID) => {
    return axios.get("http://localhost:8888/users/" + userID )
             .then(response => response.data)
 }
+
 
 // Creates a user into the database
 const createUser = (userID) => {
