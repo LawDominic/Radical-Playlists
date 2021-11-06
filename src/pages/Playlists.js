@@ -27,17 +27,29 @@ function Playlists({playlists, accessToken, user}) {
                 const newItem = data.body
                 newItem.likes = playlist.likes
                 newItem.timestamp = playlist.timestamp
+                
                 setFormattedPlaylists(arr => [...arr, newItem].sort(function(a, b){return new Date(b.timestamp) - new Date(a.timestamp)}) )
             })
         })   
     };
+
+    const updatePlaylist = (listID, type) => {
+        
+        const newList = formattedPlaylists
+        if(type == "like"){
+        newList[newList.indexOf(newList.find(playlist => playlist.id ==  listID))].likes++
+        } else if( type == "dislike"){
+            newList[newList.indexOf(newList.find(playlist => playlist.id ==  listID))].likes--
+        }
+        setFormattedPlaylists(newList)
+    }
     
     useEffect(() => {
         formatPlaylist()
     }, [])
 
     const filterState = (e) => {
-        console.log(e.target.value);
+     
         switch(e.target.value) {
             case "Newest": setFormattedPlaylists(formattedPlaylists.slice().sort(function(a, b){return new Date(b.timestamp) - new Date(a.timestamp)}));
             break;
@@ -67,7 +79,7 @@ function Playlists({playlists, accessToken, user}) {
             {formattedPlaylists.map((list) => {
                     return (
                     <div key={list.id}>
-                        <PlaylistCard likeCount={list.likes} pName={list.name} pCreator={list.owner.id} imgSrc={list.images[0].url} playlistID={list.id} user={user}/> 
+                        <PlaylistCard likeCount={list.likes} pName={list.name} pCreator={list.owner.id} imgSrc={list.images[0].url} playlistID={list.id} user={user} updateFormat={updatePlaylist}/> 
                     </div>
                     )
             })}
