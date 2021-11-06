@@ -36,7 +36,8 @@ function UserPlaylists({playlists, updateFn}) {
         var filtered = []
         if (input.length > 0) {
             for (let i = 0; i < playlists.length; i++) {
-                if (playlists[i].name.includes(input)) {
+                const playlistName = playlists[i].name.toLowerCase();
+                if (playlistName.includes(input.toLowerCase())) {
                     filtered.push(playlists[i])
                 }
             }
