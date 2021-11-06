@@ -110,7 +110,7 @@ function NavBar({user, isLoggedIn}) {
               </NavLink>
               {isLoggedIn ?
               <div>
-                <a target="_blank"rel="noreferrer"href={spotifyURL + user.id} className="block text-sm px-2 py-4 text-white font-semibold hover:bg-gray-900 hover:text-green-500 transition duration-300">
+                <a target="_blank" rel="noreferrer" href={spotifyURL + user.id} className="block text-sm px-2 py-4 text-white font-semibold hover:bg-gray-900 hover:text-green-500 transition duration-300">
                   Spotify Profile
                 </a>
                 <a to="/" className="block text-sm px-2 py-4 text-white font-semibold hover:bg-gray-900 hover:text-red-500 transition duration-300">
