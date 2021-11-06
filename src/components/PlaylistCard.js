@@ -15,7 +15,7 @@ function PlaylistCard({likeCount, pName, pCreator, imgSrc, playlistID, user, upd
     const [likes, setLikes] = useState(likeCount);
     const [bookmarkBool, setBookmarkBool] = useState(false);
     const [addBool, setAddBool] = useState(false);
-
+    const basePlaylistURL = "https://open.spotify.com/playlist/"
     // Increase the likes of a playlist by 1
     const like = (e) => {
         e.preventDefault();
@@ -88,7 +88,9 @@ function PlaylistCard({likeCount, pName, pCreator, imgSrc, playlistID, user, upd
                 </div>
                 
                 <div>
-                    <img src={`${imgSrc}`} alt="playlist" className="h-32 w-32 hidden sm:flex" />
+                    <a target="_blank"rel="noreferrer" href={`${basePlaylistURL}/${playlistID}`}>
+                        <img src={`${imgSrc}`} alt="playlist" className="h-32 w-32 hidden sm:flex" />
+                    </a>
                 </div>
                 
                 <div>
@@ -111,8 +113,10 @@ function PlaylistCard({likeCount, pName, pCreator, imgSrc, playlistID, user, upd
                 </div>
                 
                 <div>
-                    <h1 className="text-xl font-bold text-gray-700 mb-1 mr-20">{pName}</h1>
-                    <p className="text-gray-600 text-sm italic">{pCreator}</p>
+                    <a target="_blank"rel="noreferrer" href={`${basePlaylistURL}/${playlistID}`}>
+                        <h1 className="text-xl font-bold text-gray-700 mb-1 mr-20">{pName}</h1>
+                        <p className="text-gray-600 text-sm italic">{pCreator}</p>
+                    </a>
                 </div>
             </div>
     )
