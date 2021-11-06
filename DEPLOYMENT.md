@@ -1,7 +1,7 @@
 # Deployment
 
 ## Deployment URL
-
+https://radical-playlists.netlify.app/
 
 ## Instructions to run and build the project
 The project requires NodeJS and a MongoDB cluster to work.
