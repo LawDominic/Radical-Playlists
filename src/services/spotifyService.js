@@ -48,4 +48,9 @@ const createUser = (userID) => {
           .then(response => response.data)
 }
 
-export default {create, getAll, updateLikes, checkForUser, createUser}
+const deleteUser = (userID) => {
+  return axios.delete("http://localhost:8888/users/" + userID)
+          .then(response => response.data);
+}
+
+export default {create, deleteUser, getAll, updateLikes, checkForUser, createUser}

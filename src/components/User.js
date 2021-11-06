@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ShieldExclamationIcon } from "@heroicons/react/outline";
 import pImg from "../images/defaultprofile.png";
+import spotifyService from "../services/spotifyService";
+
 function User({user}) {
     const ref = useRef();
     const [showUser, setShowUser] = useState(false);
@@ -24,7 +26,8 @@ function User({user}) {
     };
 
     const deleteAccount = (e) => {
-        e.preventDefault();
+        spotifyService.deleteUser(user.id);
+        window.location.reload()
     }
 
     return (
@@ -65,10 +68,10 @@ function User({user}) {
                     </div>
                     <p
                     href="/"
-                    className="block px-4 py-2 text-gray-900 hover:text-red-500 text-sm"
+                    className="block px-4 py-2 text-gray-900 hover:text-red-500"
                     onClick={() => {setDeleteModal(!deleteModal); setShowUser(false)}}
                     >
-                    Delete your data
+                    Delete Data
                     </p>
                 </div>
                 ) : null}
