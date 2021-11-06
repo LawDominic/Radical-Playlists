@@ -6,7 +6,7 @@ import SpotifyWebApi from "spotify-web-api-node";
 
 import spotifyService from "../services/spotifyService";
 
-const Spotify = ({ code, setUser, setAccessToken, setPlaylists }) => {
+const Spotify = ({ code, setUser, setAccessToken, setPlaylists, allPlaylists }) => {
 
   // Setting the spotifyApi, so that we can use it's functions
   const spotifyApi = new SpotifyWebApi({
@@ -52,23 +52,12 @@ const Spotify = ({ code, setUser, setAccessToken, setPlaylists }) => {
         }
       })
 
-      
-     
-      // res.body.items.map((item) =>
-      //   spotifyApi.getPlaylist(item.id).then((res) => {
-          
-      //     userPlaylistArray.push(res.body);
-      //   })
-      // );
-
-      
-
 
       setPlaylists(userPlaylistArray);
     });
   });
   
-}, [accessToken]);
+}, [accessToken, allPlaylists]);
 
   return <></>;
 };

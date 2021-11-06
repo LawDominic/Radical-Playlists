@@ -54,9 +54,6 @@ function UserPlaylists({playlists, updateFn}) {
     }
 
     useEffect(() => {
-        console.log('user', playlistService.checkForUser())
-        // setUploadedPlaylists(playlistService.checkForUsers())
-        // const playlistsToUpload = availablePlaylists.filter(playlist => !uploadedPlaylists.includes(playlist));
 
         setAvailablePlaylists(availablePlaylists)
     }, [])

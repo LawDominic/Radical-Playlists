@@ -54,7 +54,7 @@ function App() {
       <NavBar user={user} isLoggedIn={isLoggedIn} />
       
       <div>
-        {code ? <Spotify code={code} setUser={setUser} setAccessToken={setAccessToken} setPlaylists={setUserPlaylists}/> : <> </>}
+        {code ? <Spotify code={code} setUser={setUser} setAccessToken={setAccessToken} setPlaylists={setUserPlaylists} allPlaylists={allPlaylists}/> : <> </>}
       </div>
       
       <Switch>
