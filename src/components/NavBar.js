@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 
 import { ShieldExclamationIcon } from "@heroicons/react/outline";
 
@@ -59,14 +59,14 @@ function NavBar({user, isLoggedIn, accessToken}) {
               : null }
 
               <div className="hidden md:flex md:items-center space-x-8">
-                <NavLink exact to={"/"} className="text-white font-semibold hover:text-green-500 transition duration-300">
+                <NavLink exact to={"/"} className={`text-white font-semibold hover:text-green-500 transition duration-300 ${router.pathname == "/" ? "text-green-600" : "text-white"}`}>
                   Home
                 </NavLink>
                 <br />
-                <NavLink to="/upload" className="text-white font-semibold hover:text-green-500 transition duration-300">
+                <NavLink to="/upload" className={`text-white font-semibold hover:text-green-500 transition duration-300 ${router.pathname == "/upload" ? "text-green-600" : "text-white"}`}>
                   Upload playlists
                 </NavLink>
-                <NavLink to="/favourites" className="text-white font-semibold hover:text-green-500 transition duration-300">
+                <NavLink to="/favourites" className={`text-white font-semibold hover:text-green-500 transition duration-300 ${router.pathname == "/favourites" ? "text-green-600" : "text-white"}`}>
                   Favourites
                 </NavLink>
               </div>
@@ -105,13 +105,13 @@ function NavBar({user, isLoggedIn, accessToken}) {
 
           <div className="hidden mobile-menu text-center">
             <ul>
-              <NavLink exact to={"/"} className="block text-sm px-2 py-4 text-white font-semibold hover:bg-gray-900 hover:text-green-500  transition duration-300">
+              <NavLink exact to={"/"} className={`block text-sm px-2 py-4 text-white font-semibold hover:bg-gray-900 hover:text-green-500 transition duration-300 ${router.pathname == "/" ? "text-green-600" : "text-white"}`}>
                 Home
               </NavLink>
-              <NavLink to="/upload" className="block text-sm px-2 py-4 text-white font-semibold hover:bg-gray-900 hover:text-green-500 transition duration-300">
+              <NavLink to="/upload" className={`block text-sm px-2 py-4 text-white font-semibold hover:bg-gray-900 hover:text-green-500 transition duration-300 ${router.pathname == "/upload" ? "text-green-600" : "text-white"}`}>
                 Upload playlists
               </NavLink>
-              <NavLink to="/favourites" className="block text-sm px-2 py-4 text-white font-semibold hover:bg-gray-900 hover:text-green-500 transition duration-300">
+              <NavLink to="/favourites" className={`block text-sm px-2 py-4 text-white font-semibold hover:bg-gray-900 hover:text-green-500 transition duration-300 ${router.pathname == "/favourites" ? "text-green-600" : "text-white"}`}>
                 Favourites
               </NavLink>
               {isLoggedIn ?
