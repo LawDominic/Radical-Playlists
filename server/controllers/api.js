@@ -19,7 +19,7 @@ apiRouter.use(express.static('build'))
 const credentials = {
   clientId: "ada1fd60bef74c76b3e699ac0282da8d",
   clientSecret: process.env.CLIENT_SECRET,
-  redirectUri: "https://radical-playlists-prod.netlify.app/",
+  redirectUri: "https://sheltered-oasis-76603.herokuapp.com/",
 };
 
 // If a user has already logged, we check their accessToken to ensure there is some authentication
