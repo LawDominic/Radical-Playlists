@@ -5,6 +5,7 @@ const cors = require("cors");
 const { Playlist, User } = require("../models/playlists");
 
 const spotifyWebApi = require("spotify-web-api-node");
+
 const { default: axios } = require("axios");
 
 const apiRouter = express();
@@ -15,7 +16,7 @@ apiRouter.use(express.json()); // To parse JSON bodies
 // Spotify Application Information
 const credentials = {
   clientId: "ada1fd60bef74c76b3e699ac0282da8d",
-  clientSecret: "2cc01b996a5a4a61bc635ffdacaaeb63",
+  clientSecret: process.env.CLIENT_SECRET,
   redirectUri: "http://localhost:3000/",
 };
 
@@ -153,10 +154,10 @@ apiRouter.delete("/favourites/:userID/:playlistID", (req, res) => {
     })} else {
       res.status(401).end();
     }
+  }).catch(() => {
+    res.status(401).end()
   }) 
 });
-
-
 
 /**
  * Deletes the all use playlists before deleting the user itself
