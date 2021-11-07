@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const authEndpoint = "https://accounts.spotify.com/authorize";
-const redirectUri = "https://radical-playlists.netlify.app/";
+const redirectUri = "https://radical-playlists-prod.netlify.app/";
 const clientId = "ada1fd60bef74c76b3e699ac0282da8d";
 
 const scopes = ["streaming","user-read-email","user-read-private","playlist-modify-private"];
