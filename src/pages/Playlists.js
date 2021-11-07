@@ -5,6 +5,7 @@ import SpotifyWebApi from "spotify-web-api-node";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 
 import PlaylistCard from "../components/PlaylistCard";
+import { ArrowCircleRightIcon } from "@heroicons/react/outline";
 
 function Playlists({playlists, accessToken, user}) {
     
@@ -13,7 +14,6 @@ function Playlists({playlists, accessToken, user}) {
     const spotifyApi = new SpotifyWebApi({
         clientId: "7b215911d14245089d73d78055353cb2", //might be wrong clientID
     });
-    
     const formatPlaylist =   () => {
         if (!accessToken) return;
         
@@ -40,7 +40,7 @@ function Playlists({playlists, accessToken, user}) {
         }
         setFormattedPlaylists(newList)
     }
-    
+
     useEffect(() => {
         formatPlaylist()
     }, [])
@@ -76,7 +76,7 @@ function Playlists({playlists, accessToken, user}) {
             {formattedPlaylists.map((list) => {
                 return (
                     <div key={list.id}>
-                        <PlaylistCard likeCount={list.likes} pName={list.name} pCreator={list.owner.id} imgSrc={list.images[0].url} playlistID={list.id} user={user} updateFormat={updatePlaylist}/> 
+                        <PlaylistCard likeCount={list.likes} pName={list.name} pCreator={list.owner.id} imgSrc={list.images[0].url} playlistID={list.id} user={user} updateFormat={updatePlaylist} accessToken={accessToken}/> 
                     </div>
                 )
             })}

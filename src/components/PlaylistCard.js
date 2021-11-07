@@ -10,7 +10,7 @@ import { PlusCircleIcon } from "@heroicons/react/outline";
 
 import playlistService from "../services/spotifyService";
 
-function PlaylistCard({likeCount, pName, pCreator, imgSrc, playlistID, user, updateFormat}) {
+function PlaylistCard({likeCount, pName, pCreator, imgSrc, playlistID, user, updateFormat, accessToken}) {
     
     const [likes, setLikes] = useState(likeCount);
     const [bookmarkBool, setBookmarkBool] = useState(false);
@@ -47,7 +47,11 @@ function PlaylistCard({likeCount, pName, pCreator, imgSrc, playlistID, user, upd
             axios.post("http://localhost:8888/favourites", {userID, playlistID})
             .then(response => response.data)
         } else {          // Remove favourite
-            axios.delete(`http://localhost:8888/favourites/${userID}/${playlistID}`)
+            axios.delete(`http://localhost:8888/favourites/${userID}/${playlistID}`, {
+                headers: {
+                    Authorization: accessToken
+                }
+            })
             .then(response => response.data);
         }
         setBookmarkBool(!bookmarkBool);

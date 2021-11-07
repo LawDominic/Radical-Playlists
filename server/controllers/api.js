@@ -5,6 +5,7 @@ const cors = require("cors");
 const { Playlist, User } = require("../models/playlists");
 
 const spotifyWebApi = require("spotify-web-api-node");
+const { default: axios } = require("axios");
 
 const apiRouter = express();
 
@@ -16,6 +17,7 @@ const credentials = {
   clientSecret: "2cc01b996a5a4a61bc635ffdacaaeb63",
   redirectUri: "http://localhost:3000/",
 };
+
 
 // Get all playlists from database
 apiRouter.get("/playlists", (req, res) => {
@@ -125,15 +127,21 @@ apiRouter.post("/favourites", (req, res) => {
 });
 
 apiRouter.delete("/favourites/:userID/:playlistID", (req, res) => {
-  
-  //Add authentication
-  
-  User.findOneAndUpdate(
-    { userID: req.params.userID },
-    { $pull: { favoritePlaylists: req.params.playlistID } }
-  ).then(() => {
-    res.send("deleted");
-  });
+  axios.get("https://api.spotify.com/v1/me", {
+    headers: {
+      Authorization: `Bearer ${req.headers.authorization}`
+    }
+  }).then((response) => {
+    if(response.status === 200) {
+    User.findOneAndUpdate(
+      { userID: req.params.userID },
+      { $pull: { favoritePlaylists: req.params.playlistID } }
+    ).then(() => {
+      res.status(204).end();
+    })} else {
+      res.status(401).end();
+    }
+  }) 
 });
 
 apiRouter.delete("/users/:userID", (req, res) => {
