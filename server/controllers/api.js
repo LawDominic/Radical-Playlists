@@ -10,9 +10,11 @@ const { default: axios } = require("axios");
 
 const apiRouter = express();
 
+
+
 apiRouter.use(cors()); // To handle cross-origin requests
 apiRouter.use(express.json()); // To parse JSON bodies
-
+apiRouter.use(express.static('build'))
 // Spotify Application Information
 const credentials = {
   clientId: "ada1fd60bef74c76b3e699ac0282da8d",
@@ -185,16 +187,6 @@ apiRouter.delete("/users/:userID", (req, res) => {
   
 });
 
-apiRouter.get('/', (req, res, next) => {
 
-  res.status(200).json({
-      status: 'success',
-      data: {
-          name: 'radical playlists',
-          version: '1.0.0'
-      }
-  });
-
-});
 
 module.exports = apiRouter;
