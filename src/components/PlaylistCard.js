@@ -9,6 +9,7 @@ import { ChevronDoubleDownIcon } from "@heroicons/react/solid";
 import { PlusCircleIcon } from "@heroicons/react/outline";
 
 import playlistService from "../services/spotifyService";
+import SpotifyWebApi from "spotify-web-api-node";
 
 function PlaylistCard({likeCount, pName, pCreator, imgSrc, playlistID, user, updateFormat, accessToken}) {
     
@@ -16,6 +17,7 @@ function PlaylistCard({likeCount, pName, pCreator, imgSrc, playlistID, user, upd
     const [bookmarkBool, setBookmarkBool] = useState(false);
     const [addBool, setAddBool] = useState(false);
     const basePlaylistURL = "https://open.spotify.com/playlist/"
+
     // Increase the likes of a playlist by 1
     const like = (e) => {
         e.preventDefault();
@@ -59,9 +61,23 @@ function PlaylistCard({likeCount, pName, pCreator, imgSrc, playlistID, user, upd
 
     // Adds the playlist to the users spotify account - Need to implement
     const add = (e) => {
+
+        const spotifyApi = new SpotifyWebApi({
+            clientId: "7b215911d14245089d73d78055353cb2",
+        });
+    
+        spotifyApi.setAccessToken(accessToken);
+
         console.log(user)
         e.preventDefault();
         setAddBool(!addBool);
+        spotifyApi.followPlaylist(playlistID ,{
+            'public' : false // Sets the playlist
+          }).then(function(data) {
+             console.log('Playlist successfully followed privately!');
+          }, function(err) {
+            console.log('Something went wrong!', err);
+          });
     };
 
 
