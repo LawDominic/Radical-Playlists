@@ -26,10 +26,10 @@ function FavouritePlaylistCard({ pName, pCreator, imgSrc, playlistID, user, acce
         e.preventDefault();
         const userID = user.id;
         if(!bookmarkBool){ // Add favourite
-            axios.post("http://localhost:8888/favourites", {userID, playlistID})
+            axios.post("/favourites", {userID, playlistID})
             .then(response => response.data)
         } else {          // Remove favourite
-            axios.delete(`http://localhost:8888/favourites/${userID}/${playlistID}`, {
+            axios.delete(`/favourites/${userID}/${playlistID}`, {
                 headers: {
                     Authorization: accessToken
                 }
@@ -59,7 +59,7 @@ function FavouritePlaylistCard({ pName, pCreator, imgSrc, playlistID, user, acce
     
     useEffect(() => {
         const userID = user.id;
-        axios.get(`http://localhost:8888/favourites/${userID}`)
+        axios.get(`/favourites/${userID}`)
         .then(response => {
             if(response.data.favoritePlaylists.includes(playlistID)){
                 setBookmarkBool(true)

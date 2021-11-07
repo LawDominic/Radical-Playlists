@@ -43,7 +43,7 @@ function Favourites({ accessToken, user}) {
   
     useEffect(() => {
         if(user)
-        return axios.get(`http://localhost:8888/favourites/${user.id}`)
+        return axios.get(`/favourites/${user.id}`)
                 .then(response => setPlaylists(response.data.favoritePlaylists))
       }, [user])
 
