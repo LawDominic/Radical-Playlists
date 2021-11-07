@@ -185,4 +185,16 @@ apiRouter.delete("/users/:userID", (req, res) => {
   
 });
 
+apiRouter.get('/', (req, res, next) => {
+
+  res.status(200).json({
+      status: 'success',
+      data: {
+          name: 'radical playlists',
+          version: '1.0.0'
+      }
+  });
+
+});
+
 module.exports = apiRouter;
