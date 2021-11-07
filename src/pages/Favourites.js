@@ -6,7 +6,11 @@ import { ChevronDownIcon } from "@heroicons/react/solid";
 
 import PlaylistCard from "../components/PlaylistCard";
 
-function Playlists({playlists, accessToken, user}) {
+import {loginUrl} from '../services/spotifyService'
+
+import bg from "../images/bg.jpg";
+
+function Favourites({playlists, accessToken, user}) {
     
     const [formattedPlaylists, setFormattedPlaylists] = useState([])
 
@@ -60,27 +64,45 @@ function Playlists({playlists, accessToken, user}) {
     }
 
     return (
-        <div className="grid items-center justify-center mt-10 space-y-10">
-            <div className="relative flex flex-row-reverse focus:ring-0 focus:outline-none ring-transparent">
-                <ChevronDownIcon className="w-2 h-2 absolute top-0 right-0 m-4 pointer-events-none" />
+        <div>
+        {accessToken ?
+            <div className="grid items-center justify-center mt-10 space-y-10">
+                <div className="relative flex flex-row-reverse focus:ring-0 focus:outline-none ring-transparent">
+                    <ChevronDownIcon className="w-2 h-2 absolute top-0 right-0 m-4 pointer-events-none" />
+                    
+                    <select onChange={filterState} class="border border-gray-400 rounded-lg text-gray-900 h-10 pl-2 pr-10 focus:ring-0 focus:outline-none ring-transparent">
+                        <option>Newest</option>
+                        <option>Oldest</option>
+                        <option>Ascending likes</option>
+                        <option>Descending likes</option>
+                    </select>
+                </div>
                 
-                <select onChange={filterState} class="border border-gray-400 rounded-lg text-gray-900 h-10 pl-2 pr-10 focus:ring-0 focus:outline-none ring-transparent">
-                    <option>Newest</option>
-                    <option>Oldest</option>
-                    <option>Ascending likes</option>
-                    <option>Descending likes</option>
-                </select>
+                {formattedPlaylists.map((list) => {
+                    return (
+                        <div key={list.id}>
+                            <PlaylistCard likeCount={list.likes} pName={list.name} pCreator={list.owner.id} imgSrc={list.images[0].url} playlistID={list.id} user={user} updateFormat={updatePlaylist} accessToken={accessToken}/> 
+                        </div>
+                    )
+                })}
             </div>
-            
-            {formattedPlaylists.map((list) => {
-                return (
-                    <div key={list.id}>
-                        <PlaylistCard likeCount={list.likes} pName={list.name} pCreator={list.owner.id} imgSrc={list.images[0].url} playlistID={list.id} user={user} updateFormat={updatePlaylist} accessToken={accessToken}/> 
-                    </div>
-                )
-            })}
+            :
+            <div className="bg-gray-900 relative">
+                <div className="w-full h-screen bg-no-repeat bg-cover opacity-20" style={{backgroundImage: `url(${bg})`}}/>
+                
+                <div className="absolute inset-0 flex justify-center items-center flex-col">
+                    <p className="text-xl text-white mt-4">Please login to access this section.</p>
+                    
+                    <a href={loginUrl} className="justify-end text-white hover:text-green-500 transition duration-300">
+                        <button className="bg-green-500 px-5 py-2 text-white rounded-full hover:shadow-2xl hover:bg-green-600 mt-4">
+                            <p className="font-semibold">Login</p>
+                        </button>
+                    </a>
+                </div>
+            </div>
+        }
         </div>
     );
 }
 
-export default Playlists;
+export default Favourites;

@@ -66,6 +66,9 @@ function NavBar({user, isLoggedIn, accessToken}) {
                 <NavLink to="/upload" className="text-white font-semibold hover:text-green-500 transition duration-300">
                   Upload playlists
                 </NavLink>
+                <NavLink to="/favourites" className="text-white font-semibold hover:text-green-500 transition duration-300">
+                  Favourites
+                </NavLink>
               </div>
 
             </div>
@@ -107,6 +110,9 @@ function NavBar({user, isLoggedIn, accessToken}) {
               </NavLink>
               <NavLink to="/upload" className="block text-sm px-2 py-4 text-white font-semibold hover:bg-gray-900 hover:text-green-500 transition duration-300">
                 Upload playlists
+              </NavLink>
+              <NavLink to="/favourites" className="block text-sm px-2 py-4 text-white font-semibold hover:bg-gray-900 hover:text-green-500 transition duration-300">
+                Favourites
               </NavLink>
               {isLoggedIn ?
               <div>

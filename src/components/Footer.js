@@ -15,6 +15,9 @@ function Footer() {
                     <NavLink to="/upload" className="px-4 text-sm hover:text-green-500">
                         Upload playlists
                     </NavLink>
+                    <NavLink to="/favourites" className="px-4 text-sm hover:text-green-500">
+                        Favourites
+                    </NavLink>
                 </div>
 
             </div>

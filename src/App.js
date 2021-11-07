@@ -7,6 +7,7 @@ import Landing from "./components/Landing";
 import NavBar from "./components/NavBar";
 import Spotify from "./components/Spotify";
 
+import Favourites from "./pages/Favourites";
 import Playlists from "./pages/Playlists";
 import Upload from "./pages/Upload";
 
@@ -60,12 +61,16 @@ function App() {
       </div>
       
       <Switch>
+        <Route path="/favourites">
+          <Favourites accessToken={accessToken} playlists={allPlaylists} user={user}/>
+        </Route>
+
         <Route path="/upload">
           <Upload isLoggedIn={isLoggedIn} playlists={userPlaylists} updateFn={addPlaylists}/>
         </Route>
         
         <Route path="/">
-          {isLoggedIn ? <Playlists code={code} accessToken={accessToken} playlists={allPlaylists} user={user}/> : <Landing />}
+          {isLoggedIn ? <Playlists accessToken={accessToken} playlists={allPlaylists} user={user}/> : <Landing />}
         </Route>
       </Switch>
 
