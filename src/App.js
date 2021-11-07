@@ -23,7 +23,6 @@ function App() {
   const [accessToken, setAccessToken] = useState(null);
   const [userPlaylists, setUserPlaylists] = useState([]);
   const [allPlaylists, setAllPlaylists] = useState([]);
-  const [userFavourites, setUserFavourites] = useState([]);
   const [playlistCounter, setPlaylistCounter] = useState(0);
   
   const loggedInStatus = (user) => {
@@ -55,7 +54,7 @@ function App() {
       })
   }, [playlistCounter]);
 
-
+  
   
 
   return (

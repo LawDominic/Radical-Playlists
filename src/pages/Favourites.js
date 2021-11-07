@@ -26,7 +26,6 @@ function Favourites({ accessToken, user}) {
         spotifyApi.setAccessToken(accessToken);
         
         playlists.map((playlist) => {
-            console.log(playlist)
         spotifyApi.getPlaylist(playlist)
             .then((data) => {
                 const newItem = data.body
