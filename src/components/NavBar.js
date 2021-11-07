@@ -11,7 +11,7 @@ import logo from "../images/logo.png";
 import spotifyService from "../services/spotifyService";
 import { loginUrl } from '../services/spotifyService'
 
-function NavBar({user, isLoggedIn}) {
+function NavBar({user, isLoggedIn, accessToken}) {
   const spotifyURL = "https://open.spotify.com/user/"
   const [showUser, setShowUser] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false)
@@ -72,7 +72,7 @@ function NavBar({user, isLoggedIn}) {
 
             <div className="invisible md:visible my-auto z-10">
               {isLoggedIn ?
-                <User user={user} /> :
+                <User user={user} accessToken={accessToken}/> :
                 <a href={loginUrl} className="justify-end text-white hover:text-green-500 transition duration-300">
                   <button className="bg-green-500 px-5 py-2 text-white rounded-full hover:shadow-2xl hover:bg-green-600">
                     <p className="font-semibold">Login</p>

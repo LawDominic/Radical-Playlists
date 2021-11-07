@@ -19,6 +19,14 @@ const credentials = {
 };
 
 
+const checkAuthentication = authorization => {
+ return axios.get("https://api.spotify.com/v1/me", {
+    headers: {
+      Authorization: `Bearer ${authorization}`
+    }
+  })
+}
+
 // Get all playlists from database
 apiRouter.get("/playlists", (req, res) => {
   Playlist.find({}).then((result) => {
@@ -47,36 +55,38 @@ apiRouter.post("/login", (req, res) => {
 
 // Upload the playlist to the database
 apiRouter.post("/upload", (req, res) => {
-  const body = req.body;
+  
+      const body = req.body;
 
-  if (body.length === 0) {
-    return res.status(400).json({
-      error: "No playlists selected",
-    });
-  }
+      if (body.length === 0) {
+        return res.status(400).json({
+          error: "No playlists selected",
+        });
+      }
+    
+      for (let playlist of body.newObject) {
+        const newPlaylist = new Playlist({
+          playlistID: playlist,
+          timestamp: Date.now(),
+          likes: 0,
+          userID: body.user.id,
+        });
+    
+        newPlaylist.save().then((result) => {
+          console.log("playlist saved");
+        });
+    
+        User.findOne({ userID: body.user.id }).then((response) => {
+          const newList = response.uploadedPlaylists.concat(playlist);
+          User.findOneAndUpdate(
+            { userID: body.user.id },
+            { uploadedPlaylists: newList }
+          ).then((result) => {
+            res.json(result);
+          });
+        });
+      }
 
-  for (let playlist of body.newObject) {
-    const newPlaylist = new Playlist({
-      playlistID: playlist,
-      timestamp: Date.now(),
-      likes: 0,
-      userID: body.user.id,
-    });
-
-    newPlaylist.save().then((result) => {
-      console.log("playlist saved");
-    });
-
-    User.findOne({ userID: body.user.id }).then((response) => {
-      const newList = response.uploadedPlaylists.concat(playlist);
-      User.findOneAndUpdate(
-        { userID: body.user.id },
-        { uploadedPlaylists: newList }
-      ).then((result) => {
-        res.json(result);
-      });
-    });
-  }
 });
 
 // Update likes of a playlist
@@ -126,12 +136,9 @@ apiRouter.post("/favourites", (req, res) => {
   });
 });
 
+// Removes a favourited playlist from an account
 apiRouter.delete("/favourites/:userID/:playlistID", (req, res) => {
-  axios.get("https://api.spotify.com/v1/me", {
-    headers: {
-      Authorization: `Bearer ${req.headers.authorization}`
-    }
-  }).then((response) => {
+  checkAuthentication(req.headers.authorization).then((response) => {
     if(response.status === 200) {
     User.findOneAndUpdate(
       { userID: req.params.userID },
@@ -144,17 +151,27 @@ apiRouter.delete("/favourites/:userID/:playlistID", (req, res) => {
   }) 
 });
 
+// Removes all user data -> Removes all playlists uploaded by the user and then deletes the account from the database
 apiRouter.delete("/users/:userID", (req, res) => {
-  Playlist.deleteMany({ userID: req.params.userID }).then(() => {
-    User.findOneAndDelete({ userID: req.params.userID }, (error, data) => {
-      if (error) {
-        console.log("Unable to delete account");
-      } else {
-        console.log("User was able to successfully delete account");
-        res.json(data);
-      }
-    });
-  });
+ checkAuthentication(req.headers.authorization).then(response => {
+    if(response.status === 200){
+      Playlist.deleteMany({ userID: req.params.userID }).then(() => {
+        User.findOneAndDelete({ userID: req.params.userID }, (error, data) => {
+          if (error) {
+            console.log("Unable to delete account");
+          } else {
+            console.log("User was able to successfully delete account");
+            res.json(data);
+          }
+        });
+      });
+    } else {
+      res.status(401).end()
+    }
+  }).catch(() =>{
+    res.status(401).end()
+  })
+  
 });
 
 module.exports = apiRouter;

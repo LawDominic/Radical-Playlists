@@ -6,7 +6,7 @@ import pImg from "../images/defaultprofile.png";
 
 import spotifyService from "../services/spotifyService";
 
-function User({user}) {
+function User({user, accessToken}) {
     
     const ref = useRef();
     const [showUser, setShowUser] = useState(false);
@@ -31,7 +31,7 @@ function User({user}) {
     };
 
     const deleteAccount = (e) => {
-        spotifyService.deleteUser(user.id);
+        spotifyService.deleteUser(user.id, accessToken);
         window.location.reload()
     }
 

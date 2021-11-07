@@ -45,9 +45,12 @@ const createUser = (userID) => {
 }
 
 // Deletes a user and all associated data off the database
-const deleteUser = (userID) => {
-  return axios.delete("http://localhost:8888/users/" + userID)
-          .then(response => response.data);
+const deleteUser = (userID, accessToken) => {
+  return axios.delete("http://localhost:8888/users/" + userID, {
+    headers: {
+      Authorization: accessToken
+    }
+  }).then(response => response.data);
 }
 
 export default {create, deleteUser, getAll, updateLikes, checkForUser, createUser}
