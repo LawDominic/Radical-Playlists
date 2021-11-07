@@ -12,6 +12,7 @@ import Playlists from "./pages/Playlists";
 import Upload from "./pages/Upload";
 
 import playlistService from "./services/spotifyService";
+import axios from "axios";
 
 const code = new URLSearchParams(window.location.search).get("code");
 
@@ -22,7 +23,7 @@ function App() {
   const [accessToken, setAccessToken] = useState(null);
   const [userPlaylists, setUserPlaylists] = useState([]);
   const [allPlaylists, setAllPlaylists] = useState([]);
-
+  const [userFavourites, setUserFavourites] = useState([]);
   const [playlistCounter, setPlaylistCounter] = useState(0);
   
   const loggedInStatus = (user) => {
@@ -44,6 +45,8 @@ function App() {
   });
 
   useEffect(() => {
+    
+
     playlistService.getAll()
       .then((response) => {
         setAllPlaylists(response);
@@ -51,6 +54,9 @@ function App() {
         history.push('/')
       })
   }, [playlistCounter]);
+
+
+  
 
   return (
     <div className="min-h-screen bg-gray-100 font-gotham">
@@ -62,7 +68,7 @@ function App() {
       
       <Switch>
         <Route path="/favourites">
-          <Favourites accessToken={accessToken} playlists={allPlaylists} user={user}/>
+          <Favourites accessToken={accessToken}  user={user}  />
         </Route>
 
         <Route path="/upload">
