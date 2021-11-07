@@ -4,44 +4,22 @@ import axios from 'axios';
 import { BookmarkIcon } from "@heroicons/react/outline";
 import { BookmarkIcon as BookmarkSolidIcon } from "@heroicons/react/solid";
 import { CheckIcon } from "@heroicons/react/solid";
-import { ChevronDoubleUpIcon } from "@heroicons/react/solid";
-import { ChevronDoubleDownIcon } from "@heroicons/react/solid";
 import { PlusCircleIcon } from "@heroicons/react/outline";
 import { CheckCircleIcon } from "@heroicons/react/outline";
 
-import playlistService from "../services/spotifyService";
+
 import SpotifyWebApi from "spotify-web-api-node";
 
-function PlaylistCard({likeCount, pName, pCreator, imgSrc, playlistID, user, updateFormat, accessToken}) {
+function FavouritePlaylistCard({ pName, pCreator, imgSrc, playlistID, user, accessToken}) {
     
-    const [likes, setLikes] = useState(likeCount);
     const [bookmarkBool, setBookmarkBool] = useState(false);
     const [addBool, setAddBool] = useState(false);
     const [addModal, setAddModal] = useState(false);
     const basePlaylistURL = "https://open.spotify.com/playlist/"
 
-    // Increase the likes of a playlist by 1
-    const like = (e) => {
-        e.preventDefault();
-        playlistService.updateLikes(playlistID, likes+1);
-        setLikes(likes + 1);
-        updateFormat(playlistID, "like");
-    };
 
-    // Decrease the likes of a playlist by 1
-    const dislike = (e) => {
-        e.preventDefault();
-        if (likes === 0) { //Will not allow for a negative number
-            playlistService.updateLikes(playlistID, likes)
-            setLikes(0);
-            
-        } else {
-            playlistService.updateLikes(playlistID, likes-1)
-            setLikes(likes - 1);
-            updateFormat(playlistID, "dislike");
-        }
 
-    };
+
 
     // Allows a playlist to be added as a favourited playlist to a user's account
     const bookmark = (e) => {
@@ -61,7 +39,7 @@ function PlaylistCard({likeCount, pName, pCreator, imgSrc, playlistID, user, upd
         setBookmarkBool(!bookmarkBool);
     };
 
-    // Adds the playlist to the users spotify account - Need to implement
+    // Adds the playlist to the users spotify account
     const add = (e) => {
         const spotifyApi = new SpotifyWebApi({
             clientId: "7b215911d14245089d73d78055353cb2",
@@ -93,17 +71,7 @@ function PlaylistCard({likeCount, pName, pCreator, imgSrc, playlistID, user, upd
     return (
         <div>
             <div className="relative p-4 bg-white flex items-center space-x-6 rounded-lg shadow-md">
-                <div className="flex flex-col">
-                    <button onClick={like} className="hover:text-blue-400 font-normal py-1 px-1 rounded justify-center">
-                        <ChevronDoubleUpIcon className="h-4 text-gray-900 hover:text-green-600" />
-                    </button>
-
-                    <p className="text-center">{likes}</p>
-                    
-                    <button onClick={dislike} className="hover:text-blue-400 font-normal py-1 px-1 rounded justify-center">
-                        <ChevronDoubleDownIcon className="h-4 text-gray-900 hover:text-red-600" />
-                    </button>
-                </div>
+              
                 
                 <div>
                     <a target="_blank"rel="noreferrer" href={`${basePlaylistURL}${playlistID}`}>
@@ -159,4 +127,4 @@ function PlaylistCard({likeCount, pName, pCreator, imgSrc, playlistID, user, upd
     )
 }
 
-export default PlaylistCard;
+export default FavouritePlaylistCard;

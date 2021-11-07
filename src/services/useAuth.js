@@ -9,7 +9,7 @@ export default function useAuth(code) {
   const [accessToken, setAccessToken] = useState();
 
   useEffect(() => {
-    axios.post("http://localhost:8888/login", { code })
+    axios.post("/login", { code })
       .then((response) => {
         
         // If success then cut the code string from the URL and execute the other thing

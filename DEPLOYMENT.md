@@ -1,7 +1,7 @@
 # Deployment
 
 ## Deployment URL
-https://radical-playlists.netlify.app/
+https://sheltered-oasis-76603.herokuapp.com/
 
 ## Instructions to run and build the project
 The project requires NodeJS and a MongoDB cluster to work.
@@ -27,3 +27,12 @@ The project requires NodeJS and a MongoDB cluster to work.
 ## Continuous Integration
 
 Continuous Integration has not been used in this project.
+
+## Developement Takeover
+
+In the scenario that someone were to take over development, It's important that the Spotify credentials are handled
+
+1. The Developer can message one of the members and obtain the Client Secret and Client ID to allow further continuation
+
+2. The Developer can substitute all values of clientId and clientSecret with their own application created on https://developer.spotify.com/
+    and use this code as a template

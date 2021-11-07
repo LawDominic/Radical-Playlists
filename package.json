@@ -10,17 +10,20 @@
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "autoprefixer": "^9.8.7",
     "axios": "^0.21.4",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "mongoose": "^6.0.10",
+    "postcss": "^7.0.38",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^5.3.0",
     "react-scripts": "4.0.3",
     "spotify-web-api-node": "^5.0.2",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.16",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
@@ -50,9 +53,6 @@
     ]
   },
   "devDependencies": {
-    "autoprefixer": "^9.8.7",
-    "@shelf/jest-mongodb": "^2.1.0",
-    "postcss": "^7.0.38",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.16"
+    "@shelf/jest-mongodb": "^2.1.0"
   }
 }

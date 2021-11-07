@@ -10,14 +10,16 @@ const { default: axios } = require("axios");
 
 const apiRouter = express();
 
+
+
 apiRouter.use(cors()); // To handle cross-origin requests
 apiRouter.use(express.json()); // To parse JSON bodies
-
+apiRouter.use(express.static('build'))
 // Spotify Application Information
 const credentials = {
   clientId: "ada1fd60bef74c76b3e699ac0282da8d",
   clientSecret: process.env.CLIENT_SECRET,
-  redirectUri: "http://localhost:3000/",
+  redirectUri: "https://sheltered-oasis-76603.herokuapp.com/",
 };
 
 // If a user has already logged, we check their accessToken to ensure there is some authentication
@@ -184,5 +186,7 @@ apiRouter.delete("/users/:userID", (req, res) => {
   })
   
 });
+
+
 
 module.exports = apiRouter;
