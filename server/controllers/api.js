@@ -12,13 +12,14 @@ const apiRouter = express();
 apiRouter.use(cors()); // To handle cross-origin requests
 apiRouter.use(express.json()); // To parse JSON bodies
 
+// Spotify Application Information
 const credentials = {
   clientId: "ada1fd60bef74c76b3e699ac0282da8d",
   clientSecret: "2cc01b996a5a4a61bc635ffdacaaeb63",
   redirectUri: "http://localhost:3000/",
 };
 
-
+// If a user has already logged, we check their accessToken to ensure there is some authentication
 const checkAuthentication = authorization => {
  return axios.get("https://api.spotify.com/v1/me", {
     headers: {
@@ -55,7 +56,7 @@ apiRouter.post("/login", (req, res) => {
 
 // Upload the playlist to the database
 apiRouter.post("/upload", (req, res) => {
-  
+
       const body = req.body;
 
       if (body.length === 0) {
@@ -102,6 +103,7 @@ apiRouter.put("/likes/:id", (req, res) => {
   });
 });
 
+// Gets user account
 apiRouter.get("/users/:id", (req, res) => {
   const userID = req.params.id;
   User.findOne({ userID: userID }).then((result) => {
@@ -109,6 +111,7 @@ apiRouter.get("/users/:id", (req, res) => {
   });
 });
 
+// Adds a new user to the database
 apiRouter.post("/users", (req, res) => {
   const newUser = new User({
     userID: req.body.userID,
@@ -121,12 +124,14 @@ apiRouter.post("/users", (req, res) => {
   });
 });
 
+// Gets user account to handle favouriting
 apiRouter.get("/favourites/:userID", (req, res) => {
   User.findOne({ userID: req.params.userID }).then((result) => {
     res.json(result);
   });
 });
 
+// Add a favourited playlist to a users account
 apiRouter.post("/favourites", (req, res) => {
   User.findOneAndUpdate(
     { userID: req.body.userID },
@@ -151,7 +156,12 @@ apiRouter.delete("/favourites/:userID/:playlistID", (req, res) => {
   }) 
 });
 
-// Removes all user data -> Removes all playlists uploaded by the user and then deletes the account from the database
+
+
+/**
+ * Deletes the all use playlists before deleting the user itself
+ * Requires user's access token to successfully complete the request
+ */
 apiRouter.delete("/users/:userID", (req, res) => {
  checkAuthentication(req.headers.authorization).then(response => {
     if(response.status === 200){
