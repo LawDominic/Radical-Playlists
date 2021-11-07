@@ -9,8 +9,6 @@ function UserPlaylists({playlists, updateFn}) {
     const [selectedPlaylists, setSelectedPlaylists] = useState([]);
     const [availablePlaylists, setAvailablePlaylists] = useState(playlists);
 
-    const [uploadedPlaylists, setUploadedPlaylists] = useState([]);
-
     const deselectAll = (e) => {
         e.preventDefault();
         var a = document.getElementsByName("playlistCheckbox")
@@ -20,7 +18,6 @@ function UserPlaylists({playlists, updateFn}) {
     }
 
     const updatePlaylists = (event) => {
-        console.log(event.target.id)
         if(event.target.checked) {
             setSelectedPlaylists([...selectedPlaylists, event.target.id])
         } else {
@@ -31,7 +28,6 @@ function UserPlaylists({playlists, updateFn}) {
 
     const uploadPlaylists = (e) => {
         e.preventDefault();
-        console.log("Playlists getting uploaded: ", selectedPlaylists)
         updateFn(selectedPlaylists)
         setSelectedPlaylists([])
     }
@@ -55,7 +51,6 @@ function UserPlaylists({playlists, updateFn}) {
     }
 
     useEffect(() => {
-
         setAvailablePlaylists(availablePlaylists)
     }, [])
 

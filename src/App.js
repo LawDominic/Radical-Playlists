@@ -40,13 +40,11 @@ function App() {
 
   useEffect(() => {
     loggedInStatus(user); // Get logged in status once
-    // console.log("user", user);
   });
 
   useEffect(() => {
     playlistService.getAll()
       .then((response) => {
-        // console.log("Playlists we have obtained from MongoDB are : ", response);
         setAllPlaylists(response);
         setPlaylistCounter(response.length);
         history.push('/')

@@ -12,8 +12,9 @@ function Playlists({playlists, accessToken, user}) {
     const [formattedPlaylists, setFormattedPlaylists] = useState([])
 
     const spotifyApi = new SpotifyWebApi({
-        clientId: "7b215911d14245089d73d78055353cb2", //might be wrong clientID
+        clientId: "7b215911d14245089d73d78055353cb2", 
     });
+
     const formatPlaylist =   () => {
         if (!accessToken) return;
         

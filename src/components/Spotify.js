@@ -23,7 +23,6 @@ const Spotify = ({ code, setUser, setAccessToken, setPlaylists, allPlaylists }) 
     if (!accessToken) return;
     
     spotifyApi.setAccessToken(accessToken);
-    console.log("token is: " + spotifyApi.getAccessToken());
     
     spotifyApi.getMe().then((data) => { // Get user details with help of getMe() function
       setUser(data.body);
@@ -36,22 +35,18 @@ const Spotify = ({ code, setUser, setAccessToken, setPlaylists, allPlaylists }) 
     });
         
     spotifyApi.getUserPlaylists(data.body.id).then((res) => { // Obtain public playlists for a user and push them to an array
-     
       let uploadedPlaylists;
+      
       spotifyService.checkForUser(data.body.id)
-      .then(response => uploadedPlaylists = response.uploadedPlaylists).then(() => {
-        for(let item of res.body.items){
-          console.log('item'. item)
-          if(!uploadedPlaylists.includes(item.id)){
-  
-            spotifyApi.getPlaylist(item.id).then((res) => {
-            
-              userPlaylistArray.push(res.body);
-            })
+        .then(response => uploadedPlaylists = response.uploadedPlaylists).then(() => {
+          for(let item of res.body.items){
+            if(!uploadedPlaylists.includes(item.id)){
+              spotifyApi.getPlaylist(item.id).then((res) => {
+                userPlaylistArray.push(res.body);
+              })
+            }
           }
-        }
-      })
-
+        })
 
       setPlaylists(userPlaylistArray);
     });

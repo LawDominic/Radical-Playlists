@@ -61,22 +61,16 @@ function PlaylistCard({likeCount, pName, pCreator, imgSrc, playlistID, user, upd
 
     // Adds the playlist to the users spotify account - Need to implement
     const add = (e) => {
-
         const spotifyApi = new SpotifyWebApi({
             clientId: "7b215911d14245089d73d78055353cb2",
         });
-    
         spotifyApi.setAccessToken(accessToken);
-
-        console.log(user)
         e.preventDefault();
         setAddBool(!addBool);
         spotifyApi.followPlaylist(playlistID ,{
             'public' : false // Sets the playlist
           }).then(function(data) {
-             console.log('Playlist successfully followed privately!');
           }, function(err) {
-            console.log('Something went wrong!', err);
           });
     };
 
