@@ -7,6 +7,7 @@ import { CheckIcon } from "@heroicons/react/solid";
 import { ChevronDoubleUpIcon } from "@heroicons/react/solid";
 import { ChevronDoubleDownIcon } from "@heroicons/react/solid";
 import { PlusCircleIcon } from "@heroicons/react/outline";
+import { CheckCircleIcon } from "@heroicons/react/outline";
 
 import playlistService from "../services/spotifyService";
 import SpotifyWebApi from "spotify-web-api-node";
@@ -16,6 +17,7 @@ function PlaylistCard({likeCount, pName, pCreator, imgSrc, playlistID, user, upd
     const [likes, setLikes] = useState(likeCount);
     const [bookmarkBool, setBookmarkBool] = useState(false);
     const [addBool, setAddBool] = useState(false);
+    const [addModal, setAddModal] = useState(false);
     const basePlaylistURL = "https://open.spotify.com/playlist/"
 
     // Increase the likes of a playlist by 1
@@ -67,6 +69,7 @@ function PlaylistCard({likeCount, pName, pCreator, imgSrc, playlistID, user, upd
         spotifyApi.setAccessToken(accessToken);
         e.preventDefault();
         setAddBool(!addBool);
+        setAddModal(!addModal);
         spotifyApi.followPlaylist(playlistID ,{
             'public' : false // Sets the playlist
           }).then(function(data) {
@@ -88,6 +91,7 @@ function PlaylistCard({likeCount, pName, pCreator, imgSrc, playlistID, user, upd
     
 
     return (
+        <div>
             <div className="relative p-4 bg-white flex items-center space-x-6 rounded-lg shadow-md">
                 <div className="flex flex-col">
                     <button onClick={like} className="hover:text-blue-400 font-normal py-1 px-1 rounded justify-center">
@@ -133,6 +137,25 @@ function PlaylistCard({likeCount, pName, pCreator, imgSrc, playlistID, user, upd
                     </a>
                 </div>
             </div>
+            {addModal ? 
+                <div class="flex flex-col min-w-screen h-screen animated fadeIn faster fixed left-0 top-0 justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-gray-900 bg-opacity-90 px-2">
+                    <div class="flex flex-col p-8 bg-white rounded-2xl">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                            <CheckCircleIcon className="h-12 w-12 text-green-600 rounded-xl bg-green-100 p-2 mx-auto mb-2 md:mb-0"/>
+                            <div class="flex flex-col ml-3">
+                                <div class="font-medium leading-none">Success</div>
+                                <p class="text-sm text-gray-600 leading-none mt-1">You have added this playlist to your Spotify account as a private playlist.
+                                </p>
+                            </div>
+                        </div>
+                        <div className="flex mx-auto items-center justify-center space-x-2 mt-6">
+                            <button onClick={() => {setAddModal(false)}} className="bg-green-500 px-5 py-2 text-white rounded-full hover:bg-green-500 shadow-md">
+                                Continue
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                : null}</div>
     )
 }
 

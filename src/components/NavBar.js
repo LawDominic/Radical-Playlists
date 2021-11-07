@@ -130,14 +130,12 @@ function NavBar({user, isLoggedIn, accessToken}) {
           {deleteModal ? 
             <div class="flex flex-col space-y- min-w-screen h-screen animated fadeIn faster fixed left-0 top-0 justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-gray-900 bg-opacity-90 px-2">
                 <div class="flex flex-col p-8 bg-white rounded-2xl">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center">
-                            <ShieldExclamationIcon className="h-12 w-12 text-red-600 rounded-xl bg-red-100 p-2"/>
-                            <div class="flex flex-col ml-3">
-                                <div class="font-medium leading-none">Confirmation</div>
-                                <p class="text-sm text-gray-600 leading-none mt-1">By deleting your account you will lose all your data.
-                                </p>
-                            </div>
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                        <ShieldExclamationIcon className="h-12 w-12 text-red-600 rounded-xl bg-red-100 p-2 mx-auto mb-2 md:mb-0"/>
+                        <div class="flex flex-col ml-3">
+                            <div class="font-medium leading-none">Confirmation</div>
+                            <p class="text-sm text-gray-600 leading-none mt-1">By deleting your account you will lose all your data.
+                            </p>
                         </div>
                     </div>
                     <div className="flex mx-auto items-center justify-center space-x-2 mt-6">
