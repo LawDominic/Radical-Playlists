@@ -15,6 +15,8 @@
 * <a href="#source-code-guide">Source code guide</a>
 * <a href="#next-steps">Next steps</a>
 * <a href="#team-roles-and-contributions">Team roles and contributions</a>
+* <a href="#Wireframes">Wireframes</a>
+* <a href="#Mockups">Mockups</a>
 
 ## Outline of the application
 
@@ -177,9 +179,15 @@ Communication was managed through a private Discord group, utilising both the te
 <strong>Upload Playlist Page</strong>
 * <img src="/src/images/wireframe2.png" alt="Upload Playlist Wireframe">
 
+<strong>Landing Page</strong>
+* <img src="/src/images/wireframe3.png" alt="Landing Page wireframe"> 
+
 ## Mockups
 <strong>Main Page</strong>
 * <img src="/src/images/mockup1.png" alt="Main Page Mockup">
 
 <strong>Upload Playlist Page</strong>
 * <img src="/src/images/mockup2.png" alt="Upload Playlist Mockup">
+
+<strong>Landing Page</strong>
+* <img src="/src/images/mockup3.png" alt="Landing Page Mockup">
